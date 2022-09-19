@@ -1,6 +1,15 @@
 .sidebar {
-  /* height: 100%;
+  height: 100%;
   display: flex;
-  flex-direction: column; */
-  /* justify-content: space-between; */
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.top,
+.bot {
+  /* border: 1px solid red; */
+  height: 13rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
