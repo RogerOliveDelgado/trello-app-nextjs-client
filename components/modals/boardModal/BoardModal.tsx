@@ -17,25 +17,21 @@ type Props = {
 export const BoardModal = ({ openBoard, handleClose }: Props) => {
   return (
     <Dialog open={openBoard} onClose={handleClose}>
-      <DialogTitle>Subscribe</DialogTitle>
+      <DialogTitle>Create board</DialogTitle>
       <DialogContent>
-        <DialogContentText>
-          To subscribe to this website, please enter your email address here. We
-          will send updates occasionally.
-        </DialogContentText>
         <TextField
           autoFocus
           margin="dense"
           id="name"
-          label="Email Address"
-          type="email"
+          label="Board Name"
+          type="text"
           fullWidth
           variant="standard"
         />
       </DialogContent>
       <DialogActions>
         <Button onClick={handleClose}>Cancel</Button>
-        <Button onClick={handleClose}>Subscribe</Button>
+        <Button onClick={handleClose}>Create</Button>
       </DialogActions>
     </Dialog>
   );
