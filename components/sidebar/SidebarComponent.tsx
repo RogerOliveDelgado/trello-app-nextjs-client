@@ -18,6 +18,7 @@ import DialogTitle from "@mui/material/DialogTitle";
 
 import styles from "../../styles/Dashboard.module.css";
 import Link from "next/link";
+import { BoardModal } from "../createdashboardmodal/BoardModal";
 
 export default function SidebarComponent() {
   const [openBoard, setOpenBoard] = React.useState(false);
@@ -56,13 +57,13 @@ export default function SidebarComponent() {
       </div>
 
       <div className={styles.bot}>
-        <ListItemButton onClick={handleClickOpenBoard}>
+        <ListItemButton onClick={handleClickOpenBoard} data-type="board">
           <ListItemIcon className={styles.buttons}>
             <AddIcon />
           </ListItemIcon>
           <ListItemText primary="Create Board" />
         </ListItemButton>
-        <ListItemButton>
+        <ListItemButton data-type="board">
           <ListItemIcon className={styles.buttons}>
             <AddIcon />
           </ListItemIcon>
@@ -77,28 +78,7 @@ export default function SidebarComponent() {
       </div>
 
       {openBoard && (
-        <Dialog open={openBoard} onClose={handleClose}>
-          <DialogTitle>Subscribe</DialogTitle>
-          <DialogContent>
-            <DialogContentText>
-              To subscribe to this website, please enter your email address
-              here. We will send updates occasionally.
-            </DialogContentText>
-            <TextField
-              autoFocus
-              margin="dense"
-              id="name"
-              label="Email Address"
-              type="email"
-              fullWidth
-              variant="standard"
-            />
-          </DialogContent>
-          <DialogActions>
-            <Button onClick={handleClose}>Cancel</Button>
-            <Button onClick={handleClose}>Subscribe</Button>
-          </DialogActions>
-        </Dialog>
+        <BoardModal openBoard={openBoard} handleClose={handleClose} />
       )}
     </div>
   );
