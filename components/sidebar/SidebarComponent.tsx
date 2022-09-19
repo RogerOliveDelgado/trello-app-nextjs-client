@@ -17,27 +17,30 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 
 import styles from "../../styles/Dashboard.module.css";
+import Link from "next/link";
 
 export default function SidebarComponent() {
-  const [open, setOpen] = React.useState(false);
+  const [openBoard, setOpenBoard] = React.useState(false);
 
-  const handleClickOpen = () => {
-    setOpen(true);
+  const handleClickOpenBoard = () => {
+    setOpenBoard(true);
   };
 
   const handleClose = () => {
-    setOpen(false);
+    setOpenBoard(false);
   };
 
   return (
     <div className={styles.sidebar}>
       <div className={styles.top}>
+        {/* <Link href="/home"> */}
         <ListItemButton>
           <ListItemIcon className={styles.buttons}>
             <HomeIcon />
           </ListItemIcon>
           <ListItemText primary="Home" />
         </ListItemButton>
+        {/* </Link> */}
         <ListItemButton>
           <ListItemIcon className={styles.buttons}>
             <DashboardIcon />
@@ -53,7 +56,7 @@ export default function SidebarComponent() {
       </div>
 
       <div className={styles.bot}>
-        <ListItemButton onClick={handleClickOpen}>
+        <ListItemButton onClick={handleClickOpenBoard}>
           <ListItemIcon className={styles.buttons}>
             <AddIcon />
           </ListItemIcon>
@@ -73,8 +76,8 @@ export default function SidebarComponent() {
         </ListItemButton>
       </div>
 
-      {open && (
-        <Dialog open={open} onClose={handleClose}>
+      {openBoard && (
+        <Dialog open={openBoard} onClose={handleClose}>
           <DialogTitle>Subscribe</DialogTitle>
           <DialogContent>
             <DialogContentText>
