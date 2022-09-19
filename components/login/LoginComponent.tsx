@@ -16,7 +16,6 @@ import { useRouter } from 'next/router';
 import { UserContext } from '../../contexts/UserContext';
 import { useContext } from 'react';
 import { signUpRequest } from '../../services/signUp';
-import { checkResponse } from '../../utils/checkResponse';
 
 function Copyright(props: any) {
   return (
