@@ -36,20 +36,20 @@ export default function SidebarComponent() {
   return (
     <div className={styles.sidebar}>
       <div className={styles.top}>
-        {/* <Link href="/home"> */}
         <ListItemButton>
           <ListItemIcon className={styles.buttons}>
             <HomeIcon />
           </ListItemIcon>
           <ListItemText primary="Home" />
         </ListItemButton>
-        {/* </Link> */}
-        <ListItemButton>
-          <ListItemIcon className={styles.buttons}>
-            <DashboardIcon />
-          </ListItemIcon>
-          <ListItemText primary="Boards" />
-        </ListItemButton>
+        <Link href="/userDashboard">
+          <ListItemButton>
+            <ListItemIcon className={styles.buttons}>
+              <DashboardIcon />
+            </ListItemIcon>
+            <ListItemText primary="Boards" />
+          </ListItemButton>
+        </Link>
         <Link href="/tasks">
           <ListItemButton>
             <ListItemIcon className={styles.buttons}>

@@ -1,4 +1,5 @@
 import React from "react";
+import { useRouter } from "next/router";
 import { styled, createTheme, ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import MuiDrawer from "@mui/material/Drawer";
@@ -13,18 +14,9 @@ import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import SidebarComponent from "../sidebar/SidebarComponent";
-
-import styles from "../../styles/Dashboard.module.css";
-
-import Button from "@mui/material/Button";
-import TextField from "@mui/material/TextField";
-import Dialog from "@mui/material/Dialog";
-import DialogActions from "@mui/material/DialogActions";
-import DialogContent from "@mui/material/DialogContent";
-import DialogContentText from "@mui/material/DialogContentText";
-import DialogTitle from "@mui/material/DialogTitle";
-import TaskCard from "../taskCards/TaskCard";
 import TasksLayout from "../taskCards/TasksLayout";
+import BoardCard from "../card/CardBoardComponent";
+import styles from "../../styles/Dashboard.module.css";
 
 type Props = {
   tasks?: boolean;
@@ -36,47 +28,8 @@ const DashboardContent = (props: Props) => {
     setOpen(!open);
   };
 
-  function FormDialog() {
-    const [open, setOpen] = React.useState(false);
-
-    const handleClickOpen = () => {
-      setOpen(true);
-    };
-
-    const handleClose = () => {
-      setOpen(false);
-    };
-
-    return (
-      <div>
-        <Button variant="outlined" onClick={handleClickOpen}>
-          Open form dialog
-        </Button>
-        <Dialog open={open} onClose={handleClose}>
-          <DialogTitle>Subscribe</DialogTitle>
-          <DialogContent>
-            <DialogContentText>
-              To subscribe to this website, please enter your email address
-              here. We will send updates occasionally.
-            </DialogContentText>
-            <TextField
-              autoFocus
-              margin="dense"
-              id="name"
-              label="Email Address"
-              type="email"
-              fullWidth
-              variant="standard"
-            />
-          </DialogContent>
-          <DialogActions>
-            <Button onClick={handleClose}>Cancel</Button>
-            <Button onClick={handleClose}>Subscribe</Button>
-          </DialogActions>
-        </Dialog>
-      </div>
-    );
-  }
+  const router = useRouter();
+  const { pathname } = router;
 
   const drawerWidth: number = 240;
 
@@ -199,7 +152,15 @@ const DashboardContent = (props: Props) => {
           }}
         >
           <Toolbar />
-          {props.tasks && <TasksLayout />}
+          {pathname === "/tasks" && <TasksLayout />}
+          {pathname === "/userDashboard" && (
+            <main className={styles.main}>
+              <section className={styles.section}>
+                <BoardCard />
+                <BoardCard />
+              </section>
+            </main>
+          )}
         </Box>
       </Box>
     </ThemeProvider>

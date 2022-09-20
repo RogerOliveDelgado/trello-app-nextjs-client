@@ -6,7 +6,7 @@ type Props = {};
 const tasks = (props: Props) => {
   return (
     <>
-      <DashboardContent tasks={true} />
+      <DashboardContent/>
     </>
   );
 };
