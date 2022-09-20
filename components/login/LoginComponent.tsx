@@ -15,7 +15,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useRouter } from 'next/router';
 import { UserContext } from '../../contexts/UserContext';
 import { useContext } from 'react';
-import { signInRequest } from '../../services/signIn';
+import User from '../../interfaces/User';
 
 function Copyright(props: any) {
   return (
@@ -41,16 +41,31 @@ export default function LoginComponent() {
   const router = useRouter();
   const userCtx = useContext(UserContext);
 
+  const setLocalStorage = (user: User): void => {
+    localStorage.setItem('userData', JSON.stringify(user));
+  };
+
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     const email = data.get('email');
     const password = data.get('password');
-    const response = await signInRequest(email, password);
-    if (response?.role) {
-      userCtx.setUserData(response);
-      if (response?.role === 'User') {
-        router.push('/userDashboard');
+
+    const dataU = require('../../data/userData.json');
+    // const response = await signInRequest(email, password);
+    // if (response?.role) {
+    //   userCtx.setUserData(response);
+    //   if (response?.role === 'User') {
+    //     router.push('/userDashboard');
+    //   } else {
+    //     router.push('/adminDashboard');
+    //   }
+    // }
+    if (dataU?.role) {
+      setLocalStorage(dataU);
+      userCtx.setUserData(dataU);
+      if (dataU?.role === 'User') {
+        router.push('/accountManager');
       } else {
         router.push('/adminDashboard');
       }
