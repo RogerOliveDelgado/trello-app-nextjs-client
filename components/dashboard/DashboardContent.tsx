@@ -27,7 +27,7 @@ import TaskCard from "../taskCards/TaskCard";
 import TasksLayout from "../taskCards/TasksLayout";
 
 type Props = {
-  tasks?: any;
+  tasks?: boolean;
 };
 
 const DashboardContent = (props: Props) => {

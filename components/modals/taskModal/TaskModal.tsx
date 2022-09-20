@@ -19,7 +19,12 @@ type Props = {
   handleClose: () => void;
 };
 
-const sendData = async (data: any) => {
+type taskData = {
+  title: string;
+  description: string;
+};
+
+const sendData = async (data: taskData) => {
   await fetch("http://localhost:3000/api/tasks", {
     method: "POST",
     headers: {
@@ -29,13 +34,12 @@ const sendData = async (data: any) => {
   });
 };
 
-
 export const TaskModal = ({ openModal, handleClose }: Props) => {
   const [titleTask, setTitleTask] = useState(String);
   const [descriptionValue, setDescriptionValue] = useState(String);
 
   const sendTextFieldValue = () => {
-    const taskData = {
+    const taskData: taskData = {
       title: titleTask,
       description: descriptionValue,
     };
