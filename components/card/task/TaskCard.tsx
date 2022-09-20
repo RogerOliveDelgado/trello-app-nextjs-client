@@ -16,6 +16,7 @@ export default function TaskCard() {
   return (
     <Card
       sx={{
+        minWidth: 200,
         maxWidth: 345,
         margin: "1rem",
         padding: ".5rem",
