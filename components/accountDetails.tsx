@@ -111,7 +111,7 @@ const AccountDetails = (props: Props) => {
                   <DesktopDatePicker
                     label="Birthday"
                     inputFormat="MM/DD/YYYY"
-                    value={values.birthday}
+                    value={date}
                     onChange={handleDate}
                     renderInput={(params) => <TextField {...params} />}
                   />
