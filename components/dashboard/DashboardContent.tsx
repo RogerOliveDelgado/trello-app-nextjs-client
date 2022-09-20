@@ -159,7 +159,7 @@ const DashboardContent = (props: Props) => {
               noWrap
               sx={{ flexGrow: 1 }}
             >
-              Dashboard
+              User - Dashboard
             </Typography>
             <IconButton color="inherit">
               <Badge badgeContent={4} color="secondary">
