@@ -9,17 +9,14 @@ interface Error {
   message: string;
 }
 
-export const signUpRequest = async (
+export const signInRequest = async (
   email: FormDataEntryValue | null,
   password: FormDataEntryValue | null
 ) => {
   try {
     const { data, status } = await axios.post<LoggedUser>(
-      `${process.env.NEXT_PUBLIC_BACKEND_URL}`,
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/signInUser`,
       {
-        headers: {
-          Authorization: ``,
-        },
         data: {
           email,
           password: encryptPassword(password),

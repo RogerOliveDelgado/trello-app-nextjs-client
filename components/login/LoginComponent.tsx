@@ -15,7 +15,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useRouter } from 'next/router';
 import { UserContext } from '../../contexts/UserContext';
 import { useContext } from 'react';
-import { signUpRequest } from '../../services/signUp';
+import { signInRequest } from '../../services/signIn';
 
 function Copyright(props: any) {
   return (
@@ -46,7 +46,7 @@ export default function LoginComponent() {
     const data = new FormData(event.currentTarget);
     const email = data.get('email');
     const password = data.get('password');
-    const response = await signUpRequest(email, password);
+    const response = await signInRequest(email, password);
     if (response?.role) {
       userCtx.setUserData(response);
       if (response?.role === 'User') {
