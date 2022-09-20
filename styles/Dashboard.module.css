@@ -11,7 +11,8 @@
 
 .section {
   display: flex;
-  /* margin-left: 1rem; */
+  justify-content: space-around;
+  flex-wrap: wrap;
   margin-top: 1rem;
 }
 
@@ -22,11 +23,4 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-}
-
-.tasksLayout {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
 }

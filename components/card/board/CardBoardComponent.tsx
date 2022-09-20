@@ -32,7 +32,13 @@ const ExpandMore = styled((props: ExpandMoreProps) => {
 
 export default function BoardCard() {
   return (
-    <Card sx={{ maxWidth: 345, ml: 2 }}>
+    <Card
+      sx={{
+        maxWidth: 345,
+        margin: "1rem",
+        padding: ".5rem",
+      }}
+    >
       <CardHeader
         avatar={
           <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">

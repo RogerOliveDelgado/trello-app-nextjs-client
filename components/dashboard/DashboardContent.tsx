@@ -14,8 +14,8 @@ import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import SidebarComponent from "../sidebar/SidebarComponent";
-import TasksLayout from "../taskCards/TasksLayout";
-import BoardCard from "../card/CardBoardComponent";
+import TasksLayout from "../card/task/TasksLayout";
+import BoardsLayout from "../card/board/BoardsLayout";
 import styles from "../../styles/Dashboard.module.css";
 
 type Props = {
@@ -153,14 +153,7 @@ const DashboardContent = (props: Props) => {
         >
           <Toolbar />
           {pathname === "/tasks" && <TasksLayout />}
-          {pathname === "/userDashboard" && (
-            <main className={styles.main}>
-              <section className={styles.section}>
-                <BoardCard />
-                <BoardCard />
-              </section>
-            </main>
-          )}
+          {pathname === "/userDashboard" && <BoardsLayout />}
         </Box>
       </Box>
     </ThemeProvider>

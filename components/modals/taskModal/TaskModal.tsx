@@ -12,7 +12,7 @@ import QuillEditor from "./QuillEditor";
 import React from "react";
 
 import styles from "../../../styles/Dashboard.module.css";
-import TaskCard from "../../taskCards/TaskCard";
+import TaskCard from "../../card/task/TaskCard";
 
 type Props = {
   openModal: boolean;
