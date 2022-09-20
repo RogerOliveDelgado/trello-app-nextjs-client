@@ -9,6 +9,7 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
+import IconButton, { IconButtonProps } from "@mui/material/IconButton";
 import { textAlign } from "@mui/system";
 
 export default function TaskCard() {
@@ -22,6 +23,11 @@ export default function TaskCard() {
     >
       <CardContent>
         <CardHeader
+          title={
+            <Typography gutterBottom variant="h5" component="div">
+              Title task
+            </Typography>
+          }
           avatar={
             <Avatar
               sx={{
@@ -32,9 +38,6 @@ export default function TaskCard() {
             </Avatar>
           }
         />
-        <Typography gutterBottom variant="h5" component="div">
-          Title task
-        </Typography>
         <Typography variant="body2" color="text.secondary">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod natus
           error aut reiciendis ratione ab aspernatur eius, tempore quo similique
@@ -42,9 +45,19 @@ export default function TaskCard() {
           debitis est illum a.
         </Typography>
       </CardContent>
-      <CardActions>
-        <EditIcon />
-        <DeleteForeverIcon />
+      <CardActions
+        disableSpacing
+        sx={{
+          display: "block",
+          textAlign: "end",
+        }}
+      >
+        <IconButton aria-label="add to favorites">
+          <EditIcon />
+        </IconButton>
+        <IconButton aria-label="share">
+          <DeleteForeverIcon />
+        </IconButton>
       </CardActions>
     </Card>
   );

@@ -12,6 +12,8 @@ const TasksLayout = (props: any) => {
         <BoardCard />
         <BoardCard />
         <BoardCard />
+        <BoardCard />
+        <BoardCard />
       </section>
     </main>
   );
