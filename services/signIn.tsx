@@ -1,5 +1,5 @@
 import axios from 'axios';
-import bcrypt from 'bcrypt';
+
 import { LoggedUser } from '../interfaces/User';
 
 export type GetUsersResponse = {
@@ -19,7 +19,8 @@ export const signInRequest = async (
       {
         data: {
           email,
-          password: encryptPassword(password),
+          password,
+          // password: encryptPassword(password),
         },
       }
     );
@@ -34,9 +35,3 @@ function getErrorMessage(error: unknown) {
   if (error instanceof Error) return error.message;
   return { status: 500, message: String(error) };
 }
-
-const encryptPassword = async (password: any) => {
-  const salt = await bcrypt.genSalt(10);
-  const encPassword = await bcrypt.hash(password, salt);
-  return encPassword;
-};
