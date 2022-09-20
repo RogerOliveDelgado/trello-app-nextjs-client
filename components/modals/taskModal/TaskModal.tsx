@@ -31,7 +31,19 @@ export const TaskModal = ({ openModal, handleClose }: Props) => {
         },
       }}
     >
-      <DialogTitle>Add Task Description</DialogTitle>
+      <DialogTitle>Add Task</DialogTitle>
+      <DialogContent>
+        <TextField
+          autoFocus
+          margin="dense"
+          id="name"
+          label="Task Name"
+          type="text"
+          fullWidth
+          variant="standard"
+          sx={{ width: 550 }}
+        />
+      </DialogContent>
       <DialogContent>
         <QuillEditor
           value={description}
