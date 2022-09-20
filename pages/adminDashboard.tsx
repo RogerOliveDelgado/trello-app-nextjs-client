@@ -7,19 +7,15 @@ import MuiAppBar, { AppBarProps as MuiAppBarProps } from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import List from "@mui/material/List";
 import Typography from "@mui/material/Typography";
-import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
 import Badge from "@mui/material/Badge";
-import Container from "@mui/material/Container";
-import Grid from "@mui/material/Grid";
-import Paper from "@mui/material/Paper";
-import Link from "@mui/material/Link";
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import SidebarComponent from "../components/sidebar/SidebarComponent";
 
 import styles from "../styles/Dashboard.module.css";
+import Head from "next/head";
 
 // function Copyright(props: any) {
 //   return (
@@ -126,13 +122,14 @@ function DashboardContent() {
               noWrap
               sx={{ flexGrow: 1 }}
             >
-              Dashboard
+              Admin-Dashboard
             </Typography>
             <IconButton color="inherit">
               <Badge badgeContent={4} color="secondary">
                 <NotificationsIcon />
               </Badge>
             </IconButton>
+            {/* Aquí irán los iconos de logout etc */}
           </Toolbar>
         </AppBar>
         <Drawer variant="permanent" open={open}>
@@ -173,5 +170,12 @@ function DashboardContent() {
 }
 
 export default function adminDashboard() {
-  return <DashboardContent />;
+  return (
+    <>
+      <Head>
+        <title>Dashboard</title>
+      </Head>
+      <DashboardContent />;
+    </>
+  );
 }
