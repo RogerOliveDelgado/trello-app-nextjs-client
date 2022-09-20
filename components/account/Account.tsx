@@ -8,20 +8,14 @@ import {
   Divider,
   Typography,
 } from '@mui/material';
+import { UserContext } from '../../contexts/UserContext';
+import { useContext } from 'react';
 
 type Props = {};
 
-const user = {
-  avatar:
-    'https://68.media.tumblr.com/a5320481d6ba1cee58dd54f7a76c91c7/tumblr_mlotnrqkb11rh8ue8o1_500.jpg',
-  city: 'Mos Eisley',
-  country: 'Tatooine',
-  jobTitle: 'The Chosen One',
-  name: 'Darth Vader',
-  timezone: 'GTM-27',
-};
-
 const Account = (props: Props) => {
+  const { userData, setUserData } = useContext(UserContext);
+  console.log(userData);
   return (
     <div>
       <Card {...props}>
@@ -34,7 +28,7 @@ const Account = (props: Props) => {
             }}
           >
             <Avatar
-              src={user.avatar}
+              src={userData.profilePicture}
               sx={{
                 height: 64,
                 mb: 2,
@@ -42,13 +36,13 @@ const Account = (props: Props) => {
               }}
             />
             <Typography color="textPrimary" gutterBottom variant="h5">
-              {user.name}
+              {userData.firstName} {userData.lastName}
             </Typography>
             <Typography color="textSecondary" variant="body2">
-              {`${user.city} ${user.country}`}
+              {`${userData.email}`}
             </Typography>
             <Typography color="textSecondary" variant="body2">
-              {user.timezone}
+              {userData.role}
             </Typography>
           </Box>
         </CardContent>

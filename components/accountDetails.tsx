@@ -1,5 +1,4 @@
 import React from 'react';
-import { useState } from 'react';
 import {
   Box,
   Button,
@@ -14,31 +13,20 @@ import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import dayjs, { Dayjs } from 'dayjs';
+import { useContext } from 'react';
+import { UserContext } from '../contexts/UserContext';
 
 type Props = {};
 
 const AccountDetails = (props: Props) => {
-  const [values, setValues] = useState({
-    firstName: 'Darth',
-    lastName: 'Vader',
-    email: 'death@star.io',
-    address: 'Mos Eislay',
-    password: '',
-  });
   const [date, setDate] = React.useState<Dayjs | null>(
     dayjs('2014-08-18T21:11:54')
   );
-
+  const { userData, setUserData } = useContext(UserContext);
   const handleDate = (newValue: Dayjs | null) => {
     setDate(newValue);
   };
 
-  const handleChange = (event: { target: { name: any; value: any } }) => {
-    setValues({
-      ...values,
-      [event.target.name]: event.target.value,
-    });
-  };
   return (
     <div>
       <form autoComplete="off" noValidate {...props}>
@@ -56,9 +44,8 @@ const AccountDetails = (props: Props) => {
                   helperText="Please specify the first name"
                   label="First name"
                   name="firstName"
-                  onChange={handleChange}
                   required
-                  value={values.firstName}
+                  value={userData.firstName}
                   variant="outlined"
                 />
               </Grid>
@@ -67,9 +54,8 @@ const AccountDetails = (props: Props) => {
                   fullWidth
                   label="Last name"
                   name="lastName"
-                  onChange={handleChange}
                   required
-                  value={values.lastName}
+                  value={userData.lastName}
                   variant="outlined"
                 />
               </Grid>
@@ -78,9 +64,8 @@ const AccountDetails = (props: Props) => {
                   fullWidth
                   label="Email Address"
                   name="email"
-                  onChange={handleChange}
                   required
-                  value={values.email}
+                  value={userData.email}
                   variant="outlined"
                 />
               </Grid>
@@ -89,9 +74,8 @@ const AccountDetails = (props: Props) => {
                   fullWidth
                   label="Password"
                   name="password"
-                  onChange={handleChange}
                   type="password"
-                  value={values.password}
+                  value={userData.password}
                   variant="outlined"
                 />
               </Grid>
@@ -100,9 +84,8 @@ const AccountDetails = (props: Props) => {
                   fullWidth
                   label="Address"
                   name="address"
-                  onChange={handleChange}
                   required
-                  value={values.address}
+                  value={userData.address}
                   variant="outlined"
                 />
               </Grid>
@@ -111,7 +94,7 @@ const AccountDetails = (props: Props) => {
                   <DesktopDatePicker
                     label="Birthday"
                     inputFormat="MM/DD/YYYY"
-                    value={date}
+                    value={userData.birthday}
                     onChange={handleDate}
                     renderInput={(params) => <TextField {...params} />}
                   />
