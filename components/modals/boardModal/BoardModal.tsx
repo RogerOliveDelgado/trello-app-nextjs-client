@@ -6,7 +6,8 @@ import {
   DialogTitle,
   TextField,
 } from "@mui/material";
-import { SetStateAction, useState } from "react";
+import { SetStateAction, useEffect, useState } from "react";
+import { createBoardReq } from "../../../services/createBoard";
 
 import styles from "../../../styles/Dashboard.module.css";
 
@@ -17,13 +18,20 @@ type Props = {
 
 export const BoardModel = ({ openModal, handleClose }: Props) => {
   const [TextFieldValue, setTextFieldValue] = useState(String);
+  const [fetchData, setFetchData] = useState();
 
   const getTextFieldValue = (e: SetStateAction<string>) => {
     setTextFieldValue(e);
   };
 
-  const sendTextFieldValue = () => {
-    console.log(TextFieldValue);
+  const requestOptions = {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ TextFieldValue }),
+  };
+
+  const sendTextFieldValue = async () => {
+    createBoardReq(requestOptions);
     handleClose();
   };
 

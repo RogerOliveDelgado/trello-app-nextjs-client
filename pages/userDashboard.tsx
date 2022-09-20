@@ -23,6 +23,8 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
+import Head from "next/head";
+import BoardCard from "../components/card/CardBoardComponent";
 
 // function Copyright(props: any) {
 //   return (
@@ -171,13 +173,14 @@ function DashboardContent() {
               noWrap
               sx={{ flexGrow: 1 }}
             >
-              Dashboard
+              User - Dashboard
             </Typography>
             <IconButton color="inherit">
               <Badge badgeContent={4} color="secondary">
                 <NotificationsIcon />
               </Badge>
             </IconButton>
+            {/* Aquí irán los iconos de logout etc */}
           </Toolbar>
         </AppBar>
         <Drawer variant="permanent" open={open}>
@@ -211,7 +214,12 @@ function DashboardContent() {
           }}
         >
           <Toolbar />
-          {/* <main>{FormDialog()}</main> */}
+          <main className={styles.main}>
+            <section className={styles.section}>
+              <BoardCard />
+              <BoardCard />
+            </section>
+          </main>
         </Box>
       </Box>
     </ThemeProvider>
@@ -219,5 +227,12 @@ function DashboardContent() {
 }
 
 export default function adminDashboard() {
-  return <DashboardContent />;
+  return (
+    <>
+      <Head>
+        <title>Dashboard</title>
+      </Head>
+      <DashboardContent />
+    </>
+  );
 }

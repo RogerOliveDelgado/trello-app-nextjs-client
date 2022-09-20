@@ -5,6 +5,16 @@
   justify-content: space-between;
 }
 
+.main {
+  min-height: 100%;
+}
+
+.section {
+  display: flex;
+  /* margin-left: 1rem; */
+  margin-top: 1rem;
+}
+
 .top,
 .bot {
   /* border: 1px solid red; */
