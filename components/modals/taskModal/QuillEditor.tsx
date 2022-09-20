@@ -26,7 +26,6 @@ interface QuillProps {
 }
 
 const QuillEditor = ({ value, onChange }: QuillProps) => {
-  console.log(value);
   const modules = {
     toolbar: [
       [{ header: [1, 2, false] }],
