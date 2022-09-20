@@ -12,14 +12,36 @@ import QuillEditor from "./QuillEditor";
 import React from "react";
 
 import styles from "../../../styles/Dashboard.module.css";
+import TaskCard from "../../taskCards/TaskCard";
 
 type Props = {
   openModal: boolean;
   handleClose: () => void;
 };
 
+const sendData = async (data: any) => {
+  await fetch("http://localhost:3000/api/tasks", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  });
+};
+
+
 export const TaskModal = ({ openModal, handleClose }: Props) => {
-  const [description, setDescription] = useState("");
+  const [titleTask, setTitleTask] = useState(String);
+  const [descriptionValue, setDescriptionValue] = useState(String);
+
+  const sendTextFieldValue = () => {
+    const taskData = {
+      title: titleTask,
+      description: descriptionValue,
+    };
+    sendData(taskData);
+    handleClose();
+  };
 
   return (
     <Dialog
@@ -42,18 +64,19 @@ export const TaskModal = ({ openModal, handleClose }: Props) => {
           fullWidth
           variant="standard"
           sx={{ width: 550 }}
+          onChange={(e) => setTitleTask(e.target.value)}
         />
       </DialogContent>
       <DialogContent>
         <QuillEditor
-          value={description}
-          onChange={setDescription}
+          value={descriptionValue}
+          onChange={setDescriptionValue}
           className={styles.TextContent}
         />
       </DialogContent>
       <DialogActions>
         <Button onClick={handleClose}>Cancel</Button>
-        <Button onClick={handleClose}>Save</Button>
+        <Button onClick={sendTextFieldValue}>Save</Button>
       </DialogActions>
     </Dialog>
   );

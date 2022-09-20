@@ -7,6 +7,7 @@ import AssignmentIcon from "@mui/icons-material/Assignment";
 import AddIcon from "@mui/icons-material/Add";
 import SettingsIcon from "@mui/icons-material/Settings";
 import HomeIcon from "@mui/icons-material/Home";
+import Link from "next/link";
 
 import { Modal } from "../modals/Modal";
 
@@ -47,14 +48,16 @@ export default function SidebarComponent() {
           <ListItemIcon className={styles.buttons}>
             <DashboardIcon />
           </ListItemIcon>
-          <ListItemText primary="Dashboard" />
+          <ListItemText primary="Boards" />
         </ListItemButton>
-        <ListItemButton>
-          <ListItemIcon className={styles.buttons}>
-            <AssignmentIcon />
-          </ListItemIcon>
-          <ListItemText primary="Task" />
-        </ListItemButton>
+        <Link href="/tasks">
+          <ListItemButton>
+            <ListItemIcon className={styles.buttons}>
+              <AssignmentIcon />
+            </ListItemIcon>
+            <ListItemText primary="Tasks" />
+          </ListItemButton>
+        </Link>
       </div>
 
       <div className={styles.bot}>
