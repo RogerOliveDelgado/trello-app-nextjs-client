@@ -11,19 +11,33 @@ import {
 import QuillEditor from "./QuillEditor";
 import React from "react";
 
+import styles from "../../../styles/Dashboard.module.css";
+
 type Props = {
-  openTask: boolean;
+  openModal: boolean;
   handleClose: () => void;
 };
 
-export const TaskModal = ({ openTask, handleClose }: Props) => {
+export const TaskModal = ({ openModal, handleClose }: Props) => {
   const [description, setDescription] = useState("");
 
   return (
-    <Dialog open={openTask} onClose={handleClose}>
+    <Dialog
+      open={openModal}
+      onClose={handleClose}
+      sx={{
+        "& .MuiDialog-paper": {
+          height: "500px",
+        },
+      }}
+    >
       <DialogTitle>Add Task Description</DialogTitle>
       <DialogContent>
-        <QuillEditor value={description} onChange={setDescription} />
+        <QuillEditor
+          value={description}
+          onChange={setDescription}
+          className={styles.TextContent}
+        />
       </DialogContent>
       <DialogActions>
         <Button onClick={handleClose}>Cancel</Button>

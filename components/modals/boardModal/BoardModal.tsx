@@ -3,20 +3,24 @@ import {
   Dialog,
   DialogActions,
   DialogContent,
-  DialogContentText,
   DialogTitle,
   TextField,
 } from "@mui/material";
-import React from "react";
+
+import styles from "../../../styles/Dashboard.module.css";
 
 type Props = {
-  openBoard: boolean;
+  openModal: boolean;
   handleClose: () => void;
 };
 
-export const BoardModal = ({ openBoard, handleClose }: Props) => {
+export const BoardModel = ({ openModal, handleClose }: Props) => {
   return (
-    <Dialog open={openBoard} onClose={handleClose}>
+    <Dialog
+      open={openModal}
+      onClose={handleClose}
+      className={styles.boardModal}
+    >
       <DialogTitle>Create board</DialogTitle>
       <DialogContent>
         <TextField
@@ -27,6 +31,7 @@ export const BoardModal = ({ openBoard, handleClose }: Props) => {
           type="text"
           fullWidth
           variant="standard"
+          sx={{ width: 550 }}
         />
       </DialogContent>
       <DialogActions>

@@ -13,7 +13,14 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
-function Copyright(props: any) {
+interface Props {
+  sx: {
+    mt: number;
+    mb: number;
+  };
+}
+
+function Copyright(props: Props) {
   return (
     <Typography
       variant="body2"

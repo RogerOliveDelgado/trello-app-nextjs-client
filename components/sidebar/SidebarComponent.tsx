@@ -8,41 +8,28 @@ import AddIcon from "@mui/icons-material/Add";
 import SettingsIcon from "@mui/icons-material/Settings";
 import HomeIcon from "@mui/icons-material/Home";
 
-import { useDisclosure } from "@chakra-ui/react";
-
-import Button from "@mui/material/Button";
-import TextField from "@mui/material/TextField";
-import Dialog from "@mui/material/Dialog";
-import DialogActions from "@mui/material/DialogActions";
-import DialogContent from "@mui/material/DialogContent";
-import DialogContentText from "@mui/material/DialogContentText";
-import DialogTitle from "@mui/material/DialogTitle";
+import { Modal } from "../modals/Modal";
 
 import styles from "../../styles/Dashboard.module.css";
-import Link from "next/link";
-import { BoardModal } from "../modals/boardModal/BoardModal";
-import { TaskModal } from "../modals/taskModal/TaskModal";
+
+type modalType = "board" | "task";
 
 export default function SidebarComponent() {
-  const [openBoard, setOpenBoard] = React.useState(false);
-  const [openTask, setOpenTask] = React.useState(false);
-
-  type modalType = "board" | "task";
+  const [openModal, setOpenModal] = React.useState(false);
+  const [modalType, setModalType] = React.useState("");
 
   const handleClickOpen = (type: modalType) => {
     if (type === "board") {
-      setOpenBoard(true);
+      setOpenModal(true);
+      setModalType(type);
     } else if (type === "task") {
-      setOpenTask(true);
+      setOpenModal(true);
+      setModalType(type);
     }
   };
 
-  const handleClose = (type: modalType) => {
-    if (type === "board") {
-      setOpenBoard(false);
-    } else if (type === "task") {
-      setOpenTask(false);
-    }
+  const handleClose = () => {
+    setOpenModal(false);
   };
 
   return (
@@ -90,17 +77,11 @@ export default function SidebarComponent() {
           <ListItemText primary="Settings" />
         </ListItemButton>
       </div>
-      {openTask && (
-        <TaskModal
-          openTask={openTask}
-          handleClose={() => handleClose("task")}
-        />
-      )}
-
-      {openBoard && (
-        <BoardModal
-          openBoard={openBoard}
-          handleClose={() => handleClose("board")}
+      {openModal && (
+        <Modal
+          openModal={openModal}
+          handleClose={handleClose}
+          modalType={modalType}
         />
       )}
     </div>
