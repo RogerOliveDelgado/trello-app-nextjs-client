@@ -11,7 +11,7 @@ export const getTasks = async (token: string) => {
       `${process.env.NEXT_PUBLIC_BACKEND_URL}/getTasks`,
       {
         headers: {
-          Authorization: `${token}`,
+          Authorization: `Bearer ${token}`,
         },
       }
     );
