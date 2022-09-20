@@ -1,70 +1,34 @@
-import { Box, Divider } from "@mui/material";
-import React from "react";
+import * as React from "react";
+import Card from "@mui/material/Card";
+import CardActions from "@mui/material/CardActions";
+import CardContent from "@mui/material/CardContent";
+import CardMedia from "@mui/material/CardMedia";
+import Button from "@mui/material/Button";
+import Typography from "@mui/material/Typography";
+import EditIcon from "@mui/icons-material/Edit";
+import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 
-type Task = {
-  title: string;
-  description: string;
-  employees?: User[];
-  initDate?: Date;
-  endDate?: Date;
-  boardRefID?: Board;
-  state?: TaskState;
-  tags?: Tag[];
-};
-
-export type Tag = {
-  title: string;
-  color: Color;
-};
-
-type TaskState = "Todo" | "In progress" | "Done";
-type Color = "Red" | "Green" | "Yellow";
-
-export interface Board {
-  name: string;
-  tasks: Task[];
-}
-
-export interface User {
-  firstName: string;
-  lastName: string;
-  address: string;
-  birthday: Date;
-  email: string;
-  password: string;
-  role: Role;
-  profilePicture: string;
-  tasks: Task[];
-}
-
-type Role = "Admin" | "User";
-
-const TaskCard = (props: any) => {
+export default function TaskCard() {
   return (
-    <Box
-      sx={{
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "center",
-        minHeight: "80px",
-        maxWidth: "300px",
-        margin: "5px",
-        padding: "10px",
-        backgroundColor: "white",
-        cursor: "pointer",
-        borderRadius: "md",
-        overflow: "auto",
-        border: "1px solid black",
-        // _hover={{
-        //   backgroundColor: 'lightblue'
-        // }}
-      }}
-    >
-      <p>{"Crear función"}</p>
-      <p>{"klk hubo"}</p>
-    </Box>
+    <Card sx={{
+      maxWidth: 345,
+      margin: "1rem",
+    }}>
+      <CardContent>
+        <Typography gutterBottom variant="h5" component="div">
+          Title task
+        </Typography>
+        <Typography variant="body2" color="text.secondary">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod natus
+          error aut reiciendis ratione ab aspernatur eius, tempore quo similique
+          reprehenderit, corporis consectetur placeat perspiciatis veniam
+          debitis est illum a.
+        </Typography>
+      </CardContent>
+      <CardActions>
+        <EditIcon />
+        <DeleteForeverIcon />
+      </CardActions>
+    </Card>
   );
-};
-
-export default TaskCard;
+}

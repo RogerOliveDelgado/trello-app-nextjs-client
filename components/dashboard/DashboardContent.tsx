@@ -24,6 +24,7 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import TaskCard from "../taskCards/TaskCard";
+import TasksLayout from "../taskCards/TasksLayout";
 
 type Props = {
   tasks?: any;
@@ -198,7 +199,7 @@ const DashboardContent = (props: Props) => {
           }}
         >
           <Toolbar />
-          {props.tasks && <TaskCard />}
+          {props.tasks && <TasksLayout />}
         </Box>
       </Box>
     </ThemeProvider>

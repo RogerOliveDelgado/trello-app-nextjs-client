@@ -13,3 +13,10 @@
   flex-direction: column;
   justify-content: space-between;
 }
+
+.tasksLayout {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
