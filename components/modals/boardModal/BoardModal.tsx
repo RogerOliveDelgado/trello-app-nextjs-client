@@ -18,7 +18,6 @@ type Props = {
 
 export const BoardModel = ({ openModal, handleClose }: Props) => {
   const [TextFieldValue, setTextFieldValue] = useState(String);
-  const [fetchData, setFetchData] = useState();
 
   const getTextFieldValue = (e: SetStateAction<string>) => {
     setTextFieldValue(e);

@@ -1,28 +1,27 @@
 import * as React from "react";
 import DashboardContent from "../components/dashboard/DashboardContent";
 
-// function Copyright(props: any) {
-//   return (
-//     <Typography
-//       variant="body2"
-//       color="text.secondary"
-//       align="center"
-//       {...props}
-//     >
-//       {"Copyright © "}
-//       <Link color="inherit" href="https://mui.com/">
-//         Your Website
-//       </Link>{" "}
-//       {new Date().getFullYear()}
-//       {"."}
-//     </Typography>
-//   );
-// }
-
-function UserDashboard() {
-  return <DashboardContent />;
+interface Props {
+  data: [
+    {
+      _id: string;
+      name: string;
+      tasks: [];
+    }
+  ];
 }
 
-export default function adminDashboard() {
-  return <UserDashboard />;
+export async function getStaticProps() {
+  const req = await fetch("https://trello-app-express-server.vercel.app/board");
+  const res = await req.json();
+
+  // console.log(res);
+  return {
+    props: res, // will be passed to the page component as props
+  };
+}
+
+export default function adminDashboard({ data }: Props) {
+  console.log(data);
+  return <DashboardContent />;
 }
