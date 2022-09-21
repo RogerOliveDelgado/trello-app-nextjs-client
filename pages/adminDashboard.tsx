@@ -19,6 +19,7 @@ import styles from '../styles/Dashboard.module.css';
 import Head from 'next/head';
 import UsersToolbar from '../components/usersToolbar/UsersToolbar';
 import UsersTable from '../components/usersTable/UsersTable';
+import UserAvatar from '../components/avatar/UserAvatar';
 
 const drawerWidth: number = 240;
 
@@ -114,6 +115,7 @@ function DashboardContent() {
                 <NotificationsIcon />
               </Badge>
             </IconButton>
+            <UserAvatar />
             {/* Aquí irán los iconos de logout etc */}
           </Toolbar>
         </AppBar>
