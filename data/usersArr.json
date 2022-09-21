@@ -1,0 +1,200 @@
+[
+    {
+        "firstName":"Alejandro",
+        "lastName": "Avila",
+        "address": "Barcelona",
+        "birthday": "23/23/12",
+        "email": "alejandro@avila.com",
+        "password":"asjbd1kj32bek1j23b1k2j3b",
+        "role": "Admin",
+        "profilePicture": "https://68.media.tumblr.com/a5320481d6ba1cee58dd54f7a76c91c7/tumblr_mlotnrqkb11rh8ue8o1_500.jpg",
+        "tasks": [
+            {
+                "title": "task1",
+                "descrition":"task1 description",
+                "employees":[],
+                "initDate":"12/12/12",
+                "endDate": "12/12/12",
+                "boardRefID": {},
+                "state":"Todo",
+                "tags":{}
+            }
+        ]
+    },
+    {
+        "firstName":"Alejandro",
+        "lastName": "Avila",
+        "address": "Barcelona",
+        "birthday": "23/23/12",
+        "email": "alejandro@avila.com",
+        "password":"asjbd1kj32bek1j23b1k2j3b",
+        "role": "Admin",
+        "profilePicture": "https://68.media.tumblr.com/a5320481d6ba1cee58dd54f7a76c91c7/tumblr_mlotnrqkb11rh8ue8o1_500.jpg",
+        "tasks": [
+            {
+                "title": "task1",
+                "descrition":"task1 description",
+                "employees":[],
+                "initDate":"12/12/12",
+                "endDate": "12/12/12",
+                "boardRefID": {},
+                "state":"Todo",
+                "tags":{}
+            }
+        ]
+    },
+    {
+        "firstName":"Alejandro",
+        "lastName": "Avila",
+        "address": "Barcelona",
+        "birthday": "23/23/12",
+        "email": "alejandro@avila.com",
+        "password":"asjbd1kj32bek1j23b1k2j3b",
+        "role": "Admin",
+        "profilePicture": "https://68.media.tumblr.com/a5320481d6ba1cee58dd54f7a76c91c7/tumblr_mlotnrqkb11rh8ue8o1_500.jpg",
+        "tasks": [
+            {
+                "title": "task1",
+                "descrition":"task1 description",
+                "employees":[],
+                "initDate":"12/12/12",
+                "endDate": "12/12/12",
+                "boardRefID": {},
+                "state":"Todo",
+                "tags":{}
+            }
+        ]
+    },
+    {
+        "firstName":"Alejandro",
+        "lastName": "Avila",
+        "address": "Barcelona",
+        "birthday": "23/23/12",
+        "email": "alejandro@avila.com",
+        "password":"asjbd1kj32bek1j23b1k2j3b",
+        "role": "Admin",
+        "profilePicture": "https://68.media.tumblr.com/a5320481d6ba1cee58dd54f7a76c91c7/tumblr_mlotnrqkb11rh8ue8o1_500.jpg",
+        "tasks": [
+            {
+                "title": "task1",
+                "descrition":"task1 description",
+                "employees":[],
+                "initDate":"12/12/12",
+                "endDate": "12/12/12",
+                "boardRefID": {},
+                "state":"Todo",
+                "tags":{}
+            }
+        ]
+    },
+    {
+        "firstName":"Alejandro",
+        "lastName": "Avila",
+        "address": "Barcelona",
+        "birthday": "23/23/12",
+        "email": "alejandro@avila.com",
+        "password":"asjbd1kj32bek1j23b1k2j3b",
+        "role": "Admin",
+        "profilePicture": "https://68.media.tumblr.com/a5320481d6ba1cee58dd54f7a76c91c7/tumblr_mlotnrqkb11rh8ue8o1_500.jpg",
+        "tasks": [
+            {
+                "title": "task1",
+                "descrition":"task1 description",
+                "employees":[],
+                "initDate":"12/12/12",
+                "endDate": "12/12/12",
+                "boardRefID": {},
+                "state":"Todo",
+                "tags":{}
+            }
+        ]
+    },
+    {
+        "firstName":"Alejandro",
+        "lastName": "Avila",
+        "address": "Barcelona",
+        "birthday": "23/23/12",
+        "email": "alejandro@avila.com",
+        "password":"asjbd1kj32bek1j23b1k2j3b",
+        "role": "Admin",
+        "profilePicture": "https://68.media.tumblr.com/a5320481d6ba1cee58dd54f7a76c91c7/tumblr_mlotnrqkb11rh8ue8o1_500.jpg",
+        "tasks": [
+            {
+                "title": "task1",
+                "descrition":"task1 description",
+                "employees":[],
+                "initDate":"12/12/12",
+                "endDate": "12/12/12",
+                "boardRefID": {},
+                "state":"Todo",
+                "tags":{}
+            }
+        ]
+    },
+    {
+        "firstName":"Alejandro",
+        "lastName": "Avila",
+        "address": "Barcelona",
+        "birthday": "23/23/12",
+        "email": "alejandro@avila.com",
+        "password":"asjbd1kj32bek1j23b1k2j3b",
+        "role": "Admin",
+        "profilePicture": "https://68.media.tumblr.com/a5320481d6ba1cee58dd54f7a76c91c7/tumblr_mlotnrqkb11rh8ue8o1_500.jpg",
+        "tasks": [
+            {
+                "title": "task1",
+                "descrition":"task1 description",
+                "employees":[],
+                "initDate":"12/12/12",
+                "endDate": "12/12/12",
+                "boardRefID": {},
+                "state":"Todo",
+                "tags":{}
+            }
+        ]
+    },
+    {
+        "firstName":"Alejandro",
+        "lastName": "Avila",
+        "address": "Barcelona",
+        "birthday": "23/23/12",
+        "email": "alejandro@avila.com",
+        "password":"asjbd1kj32bek1j23b1k2j3b",
+        "role": "Admin",
+        "profilePicture": "https://68.media.tumblr.com/a5320481d6ba1cee58dd54f7a76c91c7/tumblr_mlotnrqkb11rh8ue8o1_500.jpg",
+        "tasks": [
+            {
+                "title": "task1",
+                "descrition":"task1 description",
+                "employees":[],
+                "initDate":"12/12/12",
+                "endDate": "12/12/12",
+                "boardRefID": {},
+                "state":"Todo",
+                "tags":{}
+            }
+        ]
+    },
+    {
+        "firstName":"Alejandro",
+        "lastName": "Avila",
+        "address": "Barcelona",
+        "birthday": "23/23/12",
+        "email": "alejandro@avila.com",
+        "password":"asjbd1kj32bek1j23b1k2j3b",
+        "role": "Admin",
+        "profilePicture": "https://68.media.tumblr.com/a5320481d6ba1cee58dd54f7a76c91c7/tumblr_mlotnrqkb11rh8ue8o1_500.jpg",
+        "tasks": [
+            {
+                "title": "task1",
+                "descrition":"task1 description",
+                "employees":[],
+                "initDate":"12/12/12",
+                "endDate": "12/12/12",
+                "boardRefID": {},
+                "state":"Todo",
+                "tags":{}
+            }
+        ]
+    }
+]
