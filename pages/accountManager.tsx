@@ -18,14 +18,12 @@ import {
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import NotificationsIcon from '@mui/icons-material/Notifications';
-import {
-  mainListItems,
-  secondaryListItems,
-} from '../components/navbar/NavbarComponent';
+import SidebarComponent from '../components/sidebar/SidebarComponent';
 import Account from '../components/account/Account';
 import AccountDetails from '../components/accountDetails/accountDetails';
 import UsersTable from '../components/usersTable/UsersTable';
 import UsersToolbar from '../components/usersToolbar/UsersToolbar';
+import styles from '../styles/Dashboard.module.css';
 
 const drawerWidth: number = 240;
 
@@ -142,10 +140,8 @@ function DashboardContent() {
               </IconButton>
             </Toolbar>
             {/* <Divider /> */}
-            <List component="nav">
-              {mainListItems}
-              <Divider sx={{ my: 1 }} />
-              {secondaryListItems}
+            <List component="nav" className={styles.sidebar}>
+              <SidebarComponent />
             </List>
           </Drawer>
           <Box
@@ -161,7 +157,7 @@ function DashboardContent() {
             }}
           >
             <Toolbar />
-            {/* <Container maxWidth="lg" sx={{ marginTop: 20 }}>
+            <Container maxWidth="lg" sx={{ marginTop: 20 }}>
               <Grid container spacing={3}>
                 <Grid item lg={4} md={6} xs={12}>
                   <Account />
@@ -170,10 +166,6 @@ function DashboardContent() {
                   <AccountDetails />
                 </Grid>
               </Grid>
-            </Container> */}
-            <Container maxWidth="lg" sx={{ marginTop: 5 }}>
-              <UsersToolbar />
-              <UsersTable />
             </Container>
           </Box>
         </Box>

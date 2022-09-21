@@ -1,29 +1,29 @@
-import * as React from "react";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import ListItemText from "@mui/material/ListItemText";
-import DashboardIcon from "@mui/icons-material/Dashboard";
-import AssignmentIcon from "@mui/icons-material/Assignment";
-import AddIcon from "@mui/icons-material/Add";
-import SettingsIcon from "@mui/icons-material/Settings";
-import HomeIcon from "@mui/icons-material/Home";
-import Link from "next/link";
+import * as React from 'react';
+import ListItemButton from '@mui/material/ListItemButton';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from '@mui/material/ListItemText';
+import DashboardIcon from '@mui/icons-material/Dashboard';
+import AssignmentIcon from '@mui/icons-material/Assignment';
+import AddIcon from '@mui/icons-material/Add';
+import SettingsIcon from '@mui/icons-material/Settings';
+import HomeIcon from '@mui/icons-material/Home';
+import Link from 'next/link';
 
-import { Modal } from "../modals/Modal";
+import { Modal } from '../modals/Modal';
 
-import styles from "../../styles/Dashboard.module.css";
+import styles from '../../styles/Dashboard.module.css';
 
-type modalType = "board" | "task";
+type modalType = 'board' | 'task';
 
 export default function SidebarComponent() {
   const [openModal, setOpenModal] = React.useState(false);
-  const [modalType, setModalType] = React.useState("");
+  const [modalType, setModalType] = React.useState('');
 
   const handleClickOpen = (type: modalType) => {
-    if (type === "board") {
+    if (type === 'board') {
       setOpenModal(true);
       setModalType(type);
-    } else if (type === "task") {
+    } else if (type === 'task') {
       setOpenModal(true);
       setModalType(type);
     }
@@ -61,24 +61,26 @@ export default function SidebarComponent() {
       </div>
 
       <div className={styles.bot}>
-        <ListItemButton onClick={() => handleClickOpen("board")}>
+        <ListItemButton onClick={() => handleClickOpen('board')}>
           <ListItemIcon className={styles.buttons}>
             <AddIcon />
           </ListItemIcon>
           <ListItemText primary="Create Board" />
         </ListItemButton>
-        <ListItemButton onClick={() => handleClickOpen("task")}>
+        <ListItemButton onClick={() => handleClickOpen('task')}>
           <ListItemIcon className={styles.buttons}>
             <AddIcon />
           </ListItemIcon>
           <ListItemText primary="Create Task" />
         </ListItemButton>
-        <ListItemButton>
-          <ListItemIcon className={styles.buttons}>
-            <SettingsIcon />
-          </ListItemIcon>
-          <ListItemText primary="Settings" />
-        </ListItemButton>
+        <Link href={'/accountManager'}>
+          <ListItemButton>
+            <ListItemIcon className={styles.buttons}>
+              <SettingsIcon />
+            </ListItemIcon>
+            <ListItemText primary="Settings" />
+          </ListItemButton>
+        </Link>
       </div>
       {openModal && (
         <Modal
