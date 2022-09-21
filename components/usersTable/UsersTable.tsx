@@ -1,5 +1,5 @@
 import { Container } from '@mui/material';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 
 import PropTypes from 'prop-types';
 import {
@@ -18,10 +18,12 @@ import {
 import UsersList from '../../data/usersArr.json';
 import { getInitials } from '../../utils/getInitials';
 import User from '../../interfaces/User';
+import { UserContext } from '../../contexts/UserContext';
 
 type Props = {};
 const UsersTable = (props: Props) => {
-  console.log(UsersList);
+  const { userData, token } = useContext(UserContext);
+
   return (
     <>
       <Box sx={{ mt: 3, mb: 3 }}>

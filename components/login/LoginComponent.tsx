@@ -21,6 +21,7 @@ import { saveTokenInLStorage } from '../../utils/saveData';
 import { parseJwt } from '../../utils/decodeToken';
 import { getUserData } from '../../services/getUserData';
 import CircularProgress from '@mui/material/CircularProgress';
+import Alert from '@mui/material/Alert';
 
 interface Props {
   sx: {
@@ -74,9 +75,8 @@ export default function LoginComponent() {
     saveTokenInLStorage(response.data.jwt);
     const { sub } = parseJwt(response.data.jwt);
     const userData = await getUserData(sub, response.data.jwt);
-    setIsLogin(false);
+
     if (userData !== undefined) {
-      console.log(userData.data);
       setLocalStorage(userData.data);
       if (response.data.role === 'user') {
         router.push('/userDashboard');
@@ -140,16 +140,9 @@ export default function LoginComponent() {
                 label="Remember me"
               />
               {errorMessage && (
-                <Typography
-                  color="red"
-                  sx={{
-                    border: '2px solid red',
-                    padding: '0.5rem',
-                    borderRadius: '5px',
-                  }}
-                >
+                <Alert severity="error" color="error">
                   {errorMessage}
-                </Typography>
+                </Alert>
               )}
               <Button
                 type="submit"
