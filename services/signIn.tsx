@@ -1,6 +1,6 @@
-import axios from 'axios';
+import axios from "axios";
 
-import { LoggedUser } from '../interfaces/User';
+import { LoggedUser } from "../interfaces/User";
 
 export type GetUsersResponse = {
   data: LoggedUser;
@@ -14,19 +14,31 @@ export const signInRequest = async (
   password: FormDataEntryValue | null
 ) => {
   try {
-    const { data, status } = await axios.post<LoggedUser>(
-      `${process.env.NEXT_PUBLIC_BACKEND_URL}/signInUser`,
+    // const { data, status } = await axios.post(
+    //   "https://trello-app-express-server.vercel.app/auth/signIn",
+    //   {
+    //     data: {
+    //       email: "juancarlos@email.com",
+    //       password: "123456",
+    //       // password: encryptPassword(password),
+    //     },
+    //   }
+    // );
+
+    const req = await fetch(
+      "https://trello-app-express-server.vercel.app/auth/signIn",
       {
-        data: {
-          email,
-          password,
-          // password: encryptPassword(password),
-        },
+        mode: "cors",
+        method: "POST",
+        body: JSON.stringify({ email: email, password: password }),
+        headers: { "Content-Type": "application/json" },
       }
     );
-    return data;
+    const res = await req.json();
+    // return res;
+    console.log(res);
   } catch (error) {
-    console.log('error message: ', error);
+    console.log("error message: ", error);
     getErrorMessage(error);
   }
 };

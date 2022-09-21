@@ -1,18 +1,17 @@
 import * as React from "react";
 import DashboardContent from "../components/dashboard/DashboardContent";
 
-interface Props {
-  data: [
-    {
-      _id: string;
-      name: string;
-      tasks: [];
-    }
-  ];
-}
+import { Boards } from "../interfaces/Board";
 
+const requestOptions = {
+  method: "GET",
+  headers: { "Content-Type": "application/json", Autorization: "" },
+};
 export async function getStaticProps() {
-  const req = await fetch("https://trello-app-express-server.vercel.app/board");
+  const req = await fetch(
+    "https://trello-app-express-server.vercel.app/board",
+    {}
+  );
   const res = await req.json();
 
   // console.log(res);
@@ -21,7 +20,6 @@ export async function getStaticProps() {
   };
 }
 
-export default function adminDashboard({ data }: Props) {
-  console.log(data);
-  return <DashboardContent />;
+export default function adminDashboard({ data }: Boards) {
+  return <DashboardContent data={data} />;
 }

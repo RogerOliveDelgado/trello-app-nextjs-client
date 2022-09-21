@@ -1,21 +1,23 @@
-import * as React from 'react';
-import Head from 'next/head';
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import CssBaseline from '@mui/material/CssBaseline';
-import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
-import Link from '@mui/material/Link';
-import Box from '@mui/material/Box';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { useRouter } from 'next/router';
-import { UserContext } from '../../contexts/UserContext';
-import { useContext } from 'react';
-import User from '../../interfaces/User';
+import * as React from "react";
+import Head from "next/head";
+import Avatar from "@mui/material/Avatar";
+import Button from "@mui/material/Button";
+import CssBaseline from "@mui/material/CssBaseline";
+import TextField from "@mui/material/TextField";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Checkbox from "@mui/material/Checkbox";
+import Link from "@mui/material/Link";
+import Box from "@mui/material/Box";
+import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import Typography from "@mui/material/Typography";
+import Container from "@mui/material/Container";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { useRouter } from "next/router";
+import { UserContext } from "../../contexts/UserContext";
+import { useContext } from "react";
+import User from "../../interfaces/User";
+
+import { signInRequest } from "../../services/signIn";
 
 interface Props {
   sx: {
@@ -32,12 +34,12 @@ function Copyright(props: Props) {
       align="center"
       {...props}
     >
-      {'Copyright © '}
+      {"Copyright © "}
       <Link color="inherit" href="https://mui.com/">
         Your Website
-      </Link>{' '}
+      </Link>{" "}
       {new Date().getFullYear()}
-      {'.'}
+      {"."}
     </Typography>
   );
 }
@@ -49,16 +51,16 @@ export default function LoginComponent() {
   const userCtx = useContext(UserContext);
 
   const setLocalStorage = (user: User): void => {
-    localStorage.setItem('userData', JSON.stringify(user));
+    localStorage.setItem("userData", JSON.stringify(user));
   };
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    const email = data.get('email');
-    const password = data.get('password');
+    const email = data.get("email");
+    const password = data.get("password");
 
-    const dataU = require('../../data/userData.json');
+    const dataU = require("../../data/userData.json");
     // const response = await signInRequest(email, password);
     // if (response?.role) {
     //   userCtx.setUserData(response);
@@ -68,15 +70,16 @@ export default function LoginComponent() {
     //     router.push('/adminDashboard');
     //   }
     // }
-    if (dataU?.role) {
-      setLocalStorage(dataU);
-      userCtx.setUserData(dataU);
-      if (dataU?.role === 'User') {
-        router.push('/accountManager');
-      } else {
-        router.push('/adminDashboard');
-      }
-    }
+    // if (dataU?.role) {
+    //   setLocalStorage(dataU);
+    //   userCtx.setUserData(dataU);
+    //   if (dataU?.role === "User") {
+    //     router.push("/accountManager");
+    //   } else {
+    //     router.push("/adminDashboard");
+    //   }
+    // }
+    signInRequest(email, password);
   };
 
   return (
@@ -91,12 +94,12 @@ export default function LoginComponent() {
           <Box
             sx={{
               marginTop: 8,
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
             }}
           >
-            <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+            <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
               <LockOutlinedIcon />
             </Avatar>
             <Typography component="h1" variant="h5">

@@ -18,11 +18,9 @@ import TasksLayout from "../card/task/TasksLayout";
 import BoardsLayout from "../card/board/BoardsLayout";
 import styles from "../../styles/Dashboard.module.css";
 
-type Props = {
-  tasks?: boolean;
-};
+import { Boards } from "../../interfaces/Board";
 
-const DashboardContent = (props: Props) => {
+const DashboardContent = ({ data }: Boards) => {
   const [open, setOpen] = React.useState(true);
   const toggleDrawer = () => {
     setOpen(!open);
@@ -153,7 +151,7 @@ const DashboardContent = (props: Props) => {
         >
           <Toolbar />
           {pathname === "/tasks" && <TasksLayout />}
-          {pathname === "/userDashboard" && <BoardsLayout />}
+          {pathname === "/userDashboard" && <BoardsLayout data={data} />}
         </Box>
       </Box>
     </ThemeProvider>

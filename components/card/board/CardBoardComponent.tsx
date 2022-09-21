@@ -12,6 +12,8 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import ShareIcon from "@mui/icons-material/Share";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 
+import { Board } from "../../../interfaces/Board";
+
 interface ExpandMoreProps extends IconButtonProps {
   expand: boolean;
 }
@@ -27,7 +29,9 @@ const ExpandMore = styled((props: ExpandMoreProps) => {
   }),
 }));
 
-export default function BoardCard() {
+export default function BoardCard({ board }: Board) {
+  console.log(board.initDate);
+  const date = board.initDate?.split("T")[0];
   return (
     <Card
       sx={{
@@ -40,7 +44,7 @@ export default function BoardCard() {
       <CardHeader
         avatar={
           <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-            R
+            {board.name[0]}
           </Avatar>
         }
         action={
@@ -48,12 +52,22 @@ export default function BoardCard() {
             <MoreVertIcon />
           </IconButton>
         }
-        title="Titulo del board"
-        subheader="Fecha de la creacion del board"
+        title={board.name}
+        subheader={
+          typeof date === "undefined"
+            ? `Fecha de la creacion del board: -`
+            : `Fecha de la creacion del board: ${date}`
+        }
       />
       <CardContent>
         <Typography variant="body2" color="text.secondary">
-          Tasks del board
+          {board.tasks.map((task: any) => {
+            return (
+              <ul key={task.id}>
+                <li>{task.name}</li>
+              </ul>
+            );
+          })}
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
