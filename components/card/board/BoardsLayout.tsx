@@ -6,8 +6,10 @@ import getBoards from "../../../services/getBoards";
 
 //Add type Props when Backend is ready
 import { Boards } from "../../../interfaces/Board";
+import { useAppSelector } from "../../../store/hooks";
 
 const TasksLayout = () => {
+  const boardList = useAppSelector((state) => state.boardList);
   const [boards, setBoards] = useState<Boards>({
     data: [
       {
@@ -21,7 +23,7 @@ const TasksLayout = () => {
 
   useEffect(() => {
     getBoards(setBoards);
-  }, []);
+  }, [boardList]);
 
   const { data } = boards;
   console.log(data);

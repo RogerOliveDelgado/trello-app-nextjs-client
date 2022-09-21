@@ -13,6 +13,9 @@ import { createBoardReq } from "../../../services/createBoard";
 import getBoards from "../../../services/getBoards";
 
 import styles from "../../../styles/Dashboard.module.css";
+import { useAppDispatch } from '../../../store/hooks';
+import { useDispatch } from 'react-redux';
+import { boardActions } from "../../../store/slices/boardSlice";
 
 type Props = {
   openModal: boolean;
@@ -20,7 +23,9 @@ type Props = {
 };
 
 export const BoardModel = ({ openModal, handleClose }: Props) => {
+
   const [TextFieldValue, setTextFieldValue] = useState(String);
+  const dispatch = useAppDispatch()
 
   const date = new Date();
   const month = date.getMonth() + 1;
@@ -44,7 +49,8 @@ export const BoardModel = ({ openModal, handleClose }: Props) => {
   };
 
   const sendTextFieldValue = async () => {
-    createBoardReq(requestOptions);
+    const {data: board} = await createBoardReq(requestOptions);
+    dispatch(boardActions.addBoard(board))
     handleClose();
   };
 
