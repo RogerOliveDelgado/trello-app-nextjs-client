@@ -7,12 +7,12 @@ import {
   DialogContentText,
   DialogTitle,
   TextField,
+  Typography,
 } from "@mui/material";
 import QuillEditor from "./QuillEditor";
 import React from "react";
 
 import styles from "../../../styles/Dashboard.module.css";
-import TaskCard from "../../card/task/TaskCard";
 
 type Props = {
   openModal: boolean;
@@ -54,6 +54,7 @@ export const TaskModal = ({ openModal, handleClose }: Props) => {
       sx={{
         "& .MuiDialog-paper": {
           height: "500px",
+          width: "40rem",
         },
       }}
     >
@@ -72,6 +73,7 @@ export const TaskModal = ({ openModal, handleClose }: Props) => {
         />
       </DialogContent>
       <DialogContent>
+        <Typography variant="h6">Description:</Typography>
         <QuillEditor
           value={descriptionValue}
           onChange={setDescriptionValue}

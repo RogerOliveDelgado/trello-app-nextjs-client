@@ -17,23 +17,6 @@ import SidebarComponent from "../components/sidebar/SidebarComponent";
 import styles from "../styles/Dashboard.module.css";
 import Head from "next/head";
 
-// function Copyright(props: any) {
-//   return (
-//     <Typography
-//       variant="body2"
-//       color="text.secondary"
-//       align="center"
-//       {...props}
-//     >
-//       {"Copyright © "}
-//       <Link color="inherit" href="https://mui.com/">
-//         Your Website
-//       </Link>{" "}
-//       {new Date().getFullYear()}
-//       {"."}
-//     </Typography>
-//   );
-// }
 
 const drawerWidth: number = 240;
 
