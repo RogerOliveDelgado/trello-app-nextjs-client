@@ -13,6 +13,7 @@ import ShareIcon from "@mui/icons-material/Share";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 
 import { Board } from "../../../interfaces/Board";
+import router from "next/router";
 
 interface ExpandMoreProps extends IconButtonProps {
   expand: boolean;
@@ -30,8 +31,8 @@ const ExpandMore = styled((props: ExpandMoreProps) => {
 }));
 
 export default function BoardCard({ board }: Board) {
-  console.log(board.initDate);
   const date = board.initDate?.split("T")[0];
+
   return (
     <Card
       sx={{

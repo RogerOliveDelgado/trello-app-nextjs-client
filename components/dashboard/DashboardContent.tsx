@@ -20,7 +20,7 @@ import styles from "../../styles/Dashboard.module.css";
 
 import { Boards } from "../../interfaces/Board";
 
-const DashboardContent = ({ data }: Boards) => {
+const DashboardContent = () => {
   const [open, setOpen] = React.useState(true);
   const toggleDrawer = () => {
     setOpen(!open);
@@ -151,7 +151,7 @@ const DashboardContent = ({ data }: Boards) => {
         >
           <Toolbar />
           {pathname === "/tasks" && <TasksLayout />}
-          {pathname === "/userDashboard" && <BoardsLayout data={data} />}
+          {pathname === "/userDashboard" && <BoardsLayout />}
         </Box>
       </Box>
     </ThemeProvider>

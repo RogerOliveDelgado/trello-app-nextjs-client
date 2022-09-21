@@ -6,8 +6,11 @@ import {
   DialogTitle,
   TextField,
 } from "@mui/material";
+import router from "next/router";
 import { SetStateAction, useEffect, useState } from "react";
 import { createBoardReq } from "../../../services/createBoard";
+
+import getBoards from "../../../services/getBoards";
 
 import styles from "../../../styles/Dashboard.module.css";
 
@@ -19,14 +22,25 @@ type Props = {
 export const BoardModel = ({ openModal, handleClose }: Props) => {
   const [TextFieldValue, setTextFieldValue] = useState(String);
 
+  const date = new Date();
+  const month = date.getMonth() + 1;
+  const day = date.getDate();
+  const year = date.getFullYear();
+
+  const fullDate = `0${month}-${day}-${year}`;
+
   const getTextFieldValue = (e: SetStateAction<string>) => {
     setTextFieldValue(e);
   };
 
   const requestOptions = {
+    mode: "cors",
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ TextFieldValue }),
+    body: JSON.stringify({
+      name: TextFieldValue,
+      initDate: fullDate,
+    }),
   };
 
   const sendTextFieldValue = async () => {
@@ -50,7 +64,7 @@ export const BoardModel = ({ openModal, handleClose }: Props) => {
           type="text"
           fullWidth
           variant="standard"
-          sx={{ width: 550 }}
+          sx={{ width: 550, mb: 5 }}
           onChange={(e: React.ChangeEvent<HTMLInputElement>): void =>
             getTextFieldValue(e.target.value)
           }
