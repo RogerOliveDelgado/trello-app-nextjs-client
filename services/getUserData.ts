@@ -1,5 +1,3 @@
-import axios from 'axios';
-import { saveDataInJson } from '../utils/saveData';
 import User from '../interfaces/User';
 
 interface UserDataResponse {
