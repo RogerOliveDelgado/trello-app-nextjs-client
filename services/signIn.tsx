@@ -14,16 +14,20 @@ export const signInRequest = async (
   password: FormDataEntryValue | null
 ) => {
   try {
-    const { data, status } = await axios.post<LoggedUser>(
-      `${process.env.NEXT_PUBLIC_BACKEND_URL}/signInUser`,
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/auth/signIn`,
       {
-        data: {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
           email,
           password,
-          // password: encryptPassword(password),
-        },
+        }),
       }
     );
+    const data = await response.json();
     return data;
   } catch (error) {
     console.log('error message: ', error);

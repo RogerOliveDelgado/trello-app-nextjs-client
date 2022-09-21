@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { useState } from 'react';
 import Head from 'next/head';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
@@ -16,6 +16,11 @@ import { useRouter } from 'next/router';
 import { UserContext } from '../../contexts/UserContext';
 import { useContext } from 'react';
 import User from '../../interfaces/User';
+import { signInRequest } from '../../services/signIn';
+import { saveTokenInLStorage } from '../../utils/saveData';
+import { parseJwt } from '../../utils/decodeToken';
+import { getUserData } from '../../services/getUserData';
+import CircularProgress from '@mui/material/CircularProgress';
 
 interface Props {
   sx: {
@@ -46,7 +51,9 @@ const theme = createTheme();
 
 export default function LoginComponent() {
   const router = useRouter();
-  const userCtx = useContext(UserContext);
+  const { setUserData } = useContext(UserContext);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [isLogin, setIsLogin] = useState<boolean>(false);
 
   const setLocalStorage = (user: User): void => {
     localStorage.setItem('userData', JSON.stringify(user));
@@ -57,22 +64,22 @@ export default function LoginComponent() {
     const data = new FormData(event.currentTarget);
     const email = data.get('email');
     const password = data.get('password');
-
-    const dataU = require('../../data/userData.json');
-    // const response = await signInRequest(email, password);
-    // if (response?.role) {
-    //   userCtx.setUserData(response);
-    //   if (response?.role === 'User') {
-    //     router.push('/userDashboard');
-    //   } else {
-    //     router.push('/adminDashboard');
-    //   }
-    // }
-    if (dataU?.role) {
-      setLocalStorage(dataU);
-      userCtx.setUserData(dataU);
-      if (dataU?.role === 'User') {
-        router.push('/accountManager');
+    setIsLogin(true);
+    const response = await signInRequest(email, password);
+    if (!response?.ok) {
+      setErrorMessage(response.msg);
+      setIsLogin(false);
+      return;
+    }
+    saveTokenInLStorage(response.data.jwt);
+    const { sub } = parseJwt(response.data.jwt);
+    const userData = await getUserData(sub, response.data.jwt);
+    setIsLogin(false);
+    if (userData !== undefined) {
+      console.log(userData.data);
+      setLocalStorage(userData.data);
+      if (response.data.role === 'user') {
+        router.push('/userDashboard');
       } else {
         router.push('/adminDashboard');
       }
@@ -132,13 +139,25 @@ export default function LoginComponent() {
                 control={<Checkbox value="remember" color="primary" />}
                 label="Remember me"
               />
+              {errorMessage && (
+                <Typography
+                  color="red"
+                  sx={{
+                    border: '2px solid red',
+                    padding: '0.5rem',
+                    borderRadius: '5px',
+                  }}
+                >
+                  {errorMessage}
+                </Typography>
+              )}
               <Button
                 type="submit"
                 fullWidth
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
               >
-                Sign In
+                {isLogin ? <CircularProgress /> : 'Sign In'}
               </Button>
             </Box>
           </Box>

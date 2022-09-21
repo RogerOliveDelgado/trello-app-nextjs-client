@@ -21,20 +21,21 @@ const user = {
 const UserCtx = {
   userData: user,
   setUserData: (userData: User) => {},
+  token: '',
 };
 export const UserContext = createContext(UserCtx);
 
 const UserContextProvider = ({ children }: Props) => {
   const [userData, setUserData] = useState(UserCtx.userData);
+  const [token, setToken] = useState<string>('');
 
   useEffect(() => {
-    if (localStorage.getItem('userData')) {
-      setUserData(JSON.parse(localStorage.getItem('userData')!));
-    }
+    setUserData(JSON.parse(localStorage.getItem('userData')!));
+    setToken(localStorage.getItem('access_token')!);
   }, []);
 
   return (
-    <UserContext.Provider value={{ userData, setUserData }}>
+    <UserContext.Provider value={{ userData, setUserData, token }}>
       {children}
     </UserContext.Provider>
   );
