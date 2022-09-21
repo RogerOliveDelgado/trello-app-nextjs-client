@@ -9,6 +9,7 @@ import { useRouter } from 'next/router';
 const UserAvatar = () => {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const { userData } = useContext(UserContext);
+
   const router = useRouter();
 
   const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
