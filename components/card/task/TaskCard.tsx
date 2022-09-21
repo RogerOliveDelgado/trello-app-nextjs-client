@@ -8,8 +8,13 @@ import Typography from "@mui/material/Typography";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import IconButton, { IconButtonProps } from "@mui/material/IconButton";
+import Task from "../../../interfaces/Task";
 
-export default function TaskCard() {
+type Props = {
+  task: Task;
+};
+
+export default function TaskCard(props: Props) {
   return (
     <Card
       sx={{
@@ -23,7 +28,7 @@ export default function TaskCard() {
         <CardHeader
           title={
             <Typography gutterBottom variant="h5" component="div">
-              Title task
+              {props.task.title}
             </Typography>
           }
           avatar={
@@ -37,10 +42,10 @@ export default function TaskCard() {
           }
         />
         <Typography variant="body2" color="text.secondary">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod natus
-          error aut reiciendis ratione ab aspernatur eius, tempore quo similique
-          reprehenderit, corporis consectetur placeat perspiciatis veniam
-          debitis est illum a.
+          {props.task.description}
+        </Typography>
+        <Typography variant="body2" color="text.secondary">
+          State: {props.task.state}
         </Typography>
       </CardContent>
       <CardActions

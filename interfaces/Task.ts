@@ -1,7 +1,8 @@
-import User from './User';
-import Board from './Board';
+import User from "./User";
+import Board from "./Board";
 
 export default interface Task {
+  _id: string;
   title: string;
   description: string;
   employees: User[];
@@ -16,5 +17,5 @@ export type Tag = {
   color: Color;
 };
 
-type TaskState = 'Todo' | 'In progress' | 'Done';
-type Color = 'Red' | 'Green' | 'Yellow';
+type TaskState = "Todo" | "In progress" | "Done";
+type Color = "Red" | "Green" | "Yellow";

@@ -17,9 +17,14 @@ import SidebarComponent from "../sidebar/SidebarComponent";
 import TasksLayout from "../card/task/TasksLayout";
 import BoardsLayout from "../card/board/BoardsLayout";
 import styles from "../../styles/Dashboard.module.css";
+import Task from "../../interfaces/Task";
 
 type Props = {
-  tasks?: boolean;
+  tasks: {
+    data: {
+      data: Task[];
+    };
+  };
 };
 
 const DashboardContent = (props: Props) => {
@@ -152,7 +157,7 @@ const DashboardContent = (props: Props) => {
           }}
         >
           <Toolbar />
-          {pathname === "/tasks" && <TasksLayout />}
+          {pathname === "/tasks" && <TasksLayout tasks={props.tasks} />}
           {pathname === "/userDashboard" && <BoardsLayout />}
         </Box>
       </Box>

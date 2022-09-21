@@ -1,27 +1,25 @@
 import React from "react";
 import styles from "../../../styles/Dashboard.module.css";
 import TaskCard from "./TaskCard";
+import Task from "../../../interfaces/Task";
 
-type Props = {};
+type Props = {
+  tasks: {
+    data: {
+      data: Task[];
+    };
+  };
+};
 
-const TasksLayout = (props: any) => {
+const TasksLayout = (props: Props) => {
+  const tasks = props.tasks.data.data;
+
   return (
     <main className={styles.main}>
       <section className={styles.section}>
-        <TaskCard />
-        <TaskCard />
-        <TaskCard />
-        <TaskCard />
-        <TaskCard />
-        <TaskCard />
-        <TaskCard />
-        <TaskCard />
-        <TaskCard />
-        <TaskCard />
-        <TaskCard />
-        <TaskCard />
-        <TaskCard />
-        <TaskCard />
+        {tasks.map((task: Task) => {
+          return <TaskCard key={task._id} task={task} />;
+        })}
       </section>
     </main>
   );
