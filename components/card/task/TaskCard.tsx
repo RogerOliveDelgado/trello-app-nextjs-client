@@ -4,13 +4,10 @@ import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import { CardHeader } from "@mui/material";
 import Avatar from "@mui/material/Avatar";
-import CardMedia from "@mui/material/CardMedia";
-import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import IconButton, { IconButtonProps } from "@mui/material/IconButton";
-import { textAlign } from "@mui/system";
 
 export default function TaskCard() {
   return (
