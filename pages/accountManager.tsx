@@ -23,7 +23,9 @@ import {
   secondaryListItems,
 } from '../components/navbar/NavbarComponent';
 import Account from '../components/account/Account';
-import AccountDetails from '../components/accountDetails';
+import AccountDetails from '../components/accountDetails/accountDetails';
+import UsersTable from '../components/usersTable/UsersTable';
+import UsersToolbar from '../components/usersToolbar/UsersToolbar';
 
 const drawerWidth: number = 240;
 
@@ -159,7 +161,7 @@ function DashboardContent() {
             }}
           >
             <Toolbar />
-            <Container maxWidth="lg" sx={{ marginTop: 20 }}>
+            {/* <Container maxWidth="lg" sx={{ marginTop: 20 }}>
               <Grid container spacing={3}>
                 <Grid item lg={4} md={6} xs={12}>
                   <Account />
@@ -168,6 +170,10 @@ function DashboardContent() {
                   <AccountDetails />
                 </Grid>
               </Grid>
+            </Container> */}
+            <Container maxWidth="lg" sx={{ marginTop: 5 }}>
+              <UsersToolbar />
+              <UsersTable />
             </Container>
           </Box>
         </Box>
