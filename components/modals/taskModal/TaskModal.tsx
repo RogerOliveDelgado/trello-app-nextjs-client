@@ -1,11 +1,15 @@
 import { useState } from "react";
 import {
   Button,
+  Box,
   Dialog,
   DialogActions,
   DialogContent,
   DialogContentText,
   DialogTitle,
+  FormControl,
+  MenuItem,
+  Select,
   TextField,
   Typography,
 } from "@mui/material";
@@ -53,37 +57,95 @@ export const TaskModal = ({ openModal, handleClose }: Props) => {
       onClose={handleClose}
       sx={{
         "& .MuiDialog-paper": {
-          height: "500px",
-          width: "40rem",
+          maxWidth: "80rem",
         },
       }}
     >
       <DialogTitle>Add Task</DialogTitle>
-      <DialogContent>
-        <TextField
-          autoFocus
-          margin="dense"
-          id="name"
-          label="Task Name"
-          type="text"
-          fullWidth
-          variant="standard"
-          sx={{ width: 550 }}
-          onChange={(e) => setTitleTask(e.target.value)}
-        />
-      </DialogContent>
-      <DialogContent>
-        <Typography variant="h6">Description:</Typography>
-        <QuillEditor
-          value={descriptionValue}
-          onChange={setDescriptionValue}
-          className={styles.TextContent}
-        />
-      </DialogContent>
-      <DialogActions>
-        <Button onClick={handleClose}>Cancel</Button>
-        <Button onClick={sendTextFieldValue}>Save</Button>
-      </DialogActions>
+      <FormControl component="form">
+        <DialogContent
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "space-between",
+          }}
+        >
+          <TextField
+            required
+            autoFocus
+            margin="dense"
+            id="name"
+            label="Task Name"
+            helperText="Enter the name of the task"
+            type="text"
+            fullWidth
+            variant="outlined"
+            sx={{ width: 200 }}
+            onChange={(e) => setTitleTask(e.target.value)}
+          />
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "row",
+            }}
+          >
+            <TextField
+              required
+              id="date"
+              type="date"
+              helperText="Select a start date"
+              sx={{ width: 200 }}
+              InputLabelProps={{
+                shrink: true,
+              }}
+            />
+            <TextField
+              required
+              id="date"
+              type="date"
+              helperText="Select an end date"
+              sx={{ width: 200 }}
+              InputLabelProps={{
+                shrink: true,
+              }}
+            />
+          </Box>
+          <TextField
+            select
+            required
+            label="State"
+            helperText="Select a state"
+            sx={{ width: "10rem" }}
+          >
+            <MenuItem value="To do">To do</MenuItem>
+            <MenuItem value="In progress">In progress</MenuItem>
+            <MenuItem value="Done">Done</MenuItem>
+          </TextField>
+          <TextField
+            select
+            required
+            label="User"
+            helperText="Assign to a user"
+            sx={{ width: "10rem" }}
+          >
+            {/* <MenuItem value="To do">To do</MenuItem>
+            <MenuItem value="In progress">In progress</MenuItem>
+            <MenuItem value="Done">Done</MenuItem> */}
+          </TextField>
+          <Typography variant="h6" sx={{
+            marginTop: "1rem",
+          }}>Description:</Typography>
+          <QuillEditor
+            value={descriptionValue}
+            onChange={setDescriptionValue}
+            className={styles.TextContent}
+          />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose}>Cancel</Button>
+          <Button onClick={sendTextFieldValue}>Save</Button>
+        </DialogActions>
+      </FormControl>
     </Dialog>
   );
 };
