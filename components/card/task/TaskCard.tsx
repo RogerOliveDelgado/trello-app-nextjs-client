@@ -11,58 +11,56 @@ import IconButton, { IconButtonProps } from "@mui/material/IconButton";
 import Task from "../../../interfaces/Task";
 
 type Props = {
-  task: Task;
+  task: any;
 };
 
 export default function TaskCard(props: Props) {
-  return (
-    <Card
+  <Card
+    sx={{
+      width: 300,
+      minWidth: 250,
+      maxWidth: 345,
+      margin: "1rem",
+      padding: ".5rem",
+    }}
+  >
+    <CardContent>
+      <CardHeader
+        title={
+          <Typography gutterBottom variant="h5" component="div">
+            {props.task.title}
+          </Typography>
+        }
+        avatar={
+          <Avatar
+            sx={{
+              bgcolor: "blueviolet",
+            }}
+          >
+            J
+          </Avatar>
+        }
+      />
+      <Typography variant="body2" color="text.secondary">
+        {props.task.description}
+      </Typography>
+      <Typography variant="body2" color="text.secondary">
+        State: {props.task.state}
+      </Typography>
+    </CardContent>
+    <CardActions
+      disableSpacing
       sx={{
-        width: 300,
-        minWidth: 250,
-        maxWidth: 345,
-        margin: "1rem",
-        padding: ".5rem",
+        display: "block",
+        textAlign: "end",
       }}
     >
-      <CardContent>
-        <CardHeader
-          title={
-            <Typography gutterBottom variant="h5" component="div">
-              {props.task.title}
-            </Typography>
-          }
-          avatar={
-            <Avatar
-              sx={{
-                bgcolor: "blueviolet",
-              }}
-            >
-              J
-            </Avatar>
-          }
-        />
-        <Typography variant="body2" color="text.secondary">
-          {props.task.description}
-        </Typography>
-        <Typography variant="body2" color="text.secondary">
-          State: {props.task.state}
-        </Typography>
-      </CardContent>
-      <CardActions
-        disableSpacing
-        sx={{
-          display: "block",
-          textAlign: "end",
-        }}
-      >
-        <IconButton aria-label="add to favorites">
-          <EditIcon />
-        </IconButton>
-        <IconButton aria-label="share">
-          <DeleteForeverIcon />
-        </IconButton>
-      </CardActions>
-    </Card>
-  );
+      <IconButton aria-label="add to favorites">
+        <EditIcon />
+      </IconButton>
+      <IconButton aria-label="share">
+        <DeleteForeverIcon />
+      </IconButton>
+    </CardActions>
+  </Card>;
 }

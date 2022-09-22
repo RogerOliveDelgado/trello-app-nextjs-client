@@ -19,13 +19,16 @@ import BoardsLayout from "../card/board/BoardsLayout";
 import styles from "../../styles/Dashboard.module.css";
 import Task from "../../interfaces/Task";
 
-type Props = {
-  tasks: {
-    data: {
-      data: Task[];
-    };
-  };
-};
+// type Props = {
+//   tasks: {
+//     data: {
+//       data: Task[];
+//     };
+//   };
+// };
+
+//TODO - remove type any when merge with board functionality
+type Props = any;
 
 const DashboardContent = (props: Props) => {
   const [open, setOpen] = React.useState(true);
@@ -157,7 +160,7 @@ const DashboardContent = (props: Props) => {
           }}
         >
           <Toolbar />
-          {pathname === "/tasks" && <TasksLayout tasks={props.tasks} />}
+          {pathname === "/tasks" && <TasksLayout />}
           {pathname === "/userDashboard" && <BoardsLayout />}
         </Box>
       </Box>

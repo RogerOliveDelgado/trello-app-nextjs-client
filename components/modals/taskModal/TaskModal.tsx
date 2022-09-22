@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   Button,
   Box,
@@ -17,6 +17,8 @@ import QuillEditor from "./QuillEditor";
 import React from "react";
 
 import styles from "../../../styles/Dashboard.module.css";
+
+//TODO: fetch boards and add to select option in modal
 
 type Props = {
   openModal: boolean;
@@ -39,6 +41,21 @@ const sendData = async (data: taskData) => {
 };
 
 export const TaskModal = ({ openModal, handleClose }: Props) => {
+  const url = "https://trello-app-express-server.vercel.app/board";
+  const [boards, setBoards] = useState([]);
+
+  async function fetchBoards() {
+    const req = await fetch(url);
+    const res = await req.json();
+    setBoards(res);
+  }
+
+  useEffect(() => {
+    fetchBoards();
+  }, [url]);
+
+  console.log(boards);
+
   const [titleTask, setTitleTask] = useState(String);
   const [descriptionValue, setDescriptionValue] = useState(String);
 
@@ -110,7 +127,7 @@ export const TaskModal = ({ openModal, handleClose }: Props) => {
               }}
             />
           </Box>
-          <TextField
+          {/* <TextField
             select
             required
             label="State"
@@ -128,13 +145,18 @@ export const TaskModal = ({ openModal, handleClose }: Props) => {
             helperText="Assign to a user"
             sx={{ width: "10rem" }}
           >
-            {/* <MenuItem value="To do">To do</MenuItem>
+            <MenuItem value="To do">To do</MenuItem>
             <MenuItem value="In progress">In progress</MenuItem>
-            <MenuItem value="Done">Done</MenuItem> */}
-          </TextField>
-          <Typography variant="h6" sx={{
-            marginTop: "1rem",
-          }}>Description:</Typography>
+            <MenuItem value="Done">Done</MenuItem>
+          </TextField> */}
+          <Typography
+            variant="h6"
+            sx={{
+              marginTop: "1rem",
+            }}
+          >
+            Description:
+          </Typography>
           <QuillEditor
             value={descriptionValue}
             onChange={setDescriptionValue}
