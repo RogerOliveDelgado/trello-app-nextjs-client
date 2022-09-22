@@ -40,11 +40,11 @@ export const EditModal = ({ openModal, handleClose, task, taskId }: Props) => {
 
   const { data } = boards;
 
-  const [title, setTitle] = useState(String);
-  const [description, setDescription] = useState(String);
+  const [title, setTitle] = useState(task.title);
+  const [description, setDescription] = useState(task.description);
   const [board, setBoard] = useState(String);
-  const [initDate, setInitDate] = useState(task.initDate.split("T")[0]);
-  const [endDate, setEndDate] = useState(task.endDate.slice(0, 10));
+  const [initDate, setInitDate] = useState(formatDate(task.initDate));
+  const [endDate, setEndDate] = useState(formatDate(task.endDate));
   const [state, setState] = useState(String);
 
   const initMonth = initDate.split("-")[1];
@@ -57,7 +57,11 @@ export const EditModal = ({ openModal, handleClose, task, taskId }: Props) => {
   const endYear = endDate.split("-")[0];
   const endDateFormated = `${endMonth}-${endDay}-${endYear}`;
 
-  console.log(initDate);
+  function formatDate(date: string) {
+    const [year, month, day] = date.split("T")[0].split("-");
+    const dateFormated = `${month}-${day}-${year}`;
+    return dateFormated;
+  }
 
   useEffect(() => {
     getBoards(setBoards);
@@ -85,6 +89,8 @@ export const EditModal = ({ openModal, handleClose, task, taskId }: Props) => {
     dispatch(tasksActions.editTask(tasks));
     handleClose();
   };
+
+
 
   return (
     <Dialog
@@ -156,7 +162,7 @@ export const EditModal = ({ openModal, handleClose, task, taskId }: Props) => {
             />
           </Box>
           <TextField
-            defaultValue=""
+            defaultValue={task.state}
             select
             required
             label="State"
@@ -170,7 +176,7 @@ export const EditModal = ({ openModal, handleClose, task, taskId }: Props) => {
           <TextField
             helperText="Select a board"
             variant="outlined"
-            defaultValue=""
+            defaultValue={task.board}
             select
             required
             label="Board"
