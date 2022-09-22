@@ -13,7 +13,6 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import QuillEditor from "./QuillEditor";
 import getTasks from "../../../services/getTasks";
 import { createTaskReq } from "../../../services/createTask";
 import { useAppDispatch } from "../../../redux/hooks";
@@ -163,7 +162,6 @@ export const TaskModal = ({ openModal, handleClose }: Props) => {
             select
             required
             label="State"
-            helperText="Select a state"
             sx={{ width: "10rem" }}
             onChange={(e) => setState(e.target.value)}
           >
@@ -172,10 +170,11 @@ export const TaskModal = ({ openModal, handleClose }: Props) => {
             <MenuItem value="Done">Done</MenuItem>
           </TextField>
           <TextField
+            helperText="Select a board"
+            variant="outlined"
             select
             required
             label="User"
-            helperText="Assign the task to a board"
             sx={{ width: "10rem" }}
           >
             {data.map((board) => (
@@ -188,18 +187,15 @@ export const TaskModal = ({ openModal, handleClose }: Props) => {
               </MenuItem>
             ))}
           </TextField>
-          <Typography
-            variant="h6"
-            sx={{
-              marginTop: "1rem",
-            }}
-          >
-            Description:
-          </Typography>
-          <QuillEditor
-            value={description}
-            onChange={setDescription}
-            className={styles.TextContent}
+
+          <TextField
+            required
+            id="outlined-multiline-static"
+            label="Description"
+            multiline
+            rows={4}
+            variant="outlined"
+            onChange={(e) => setDescription(e.target.value)}
           />
         </DialogContent>
         <DialogActions>
