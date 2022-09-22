@@ -1,4 +1,4 @@
-import { SetStateAction, useEffect, useState } from "react";
+import React, { SetStateAction, useEffect, useState } from "react";
 import {
   Button,
   Box,
@@ -36,8 +36,6 @@ type taskData = {
   title: string;
   description: string;
 };
-
-
 
 export const TaskModal = ({ openModal, handleClose }: Props) => {
   const boardList = useAppSelector((state) => state.boardList);
@@ -77,8 +75,6 @@ export const TaskModal = ({ openModal, handleClose }: Props) => {
   const endYear = endDate.split("-")[0];
   const endDateFormated = `${endMonth}-${endDay}-${endYear}`;
 
-
-
   const dispatch = useDispatch();
 
   const requestOptions = {
@@ -95,7 +91,8 @@ export const TaskModal = ({ openModal, handleClose }: Props) => {
     }),
   };
 
-  const sendTextFieldValue = async () => {
+  const sendTextFieldValue = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     const { data: tasks } = await createTaskReq(requestOptions);
     dispatch(tasksActions.addTask(tasks));
     handleClose();
@@ -112,7 +109,7 @@ export const TaskModal = ({ openModal, handleClose }: Props) => {
       }}
     >
       <DialogTitle>Add Task</DialogTitle>
-      <FormControl component="form">
+      <FormControl component="form" onSubmit={sendTextFieldValue}>
         <DialogContent
           sx={{
             display: "flex",
@@ -207,7 +204,7 @@ export const TaskModal = ({ openModal, handleClose }: Props) => {
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick={sendTextFieldValue}>Save</Button>
+          <Button type="submit">Save</Button>
         </DialogActions>
       </FormControl>
     </Dialog>
