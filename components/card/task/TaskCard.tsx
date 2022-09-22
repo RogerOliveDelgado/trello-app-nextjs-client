@@ -58,6 +58,11 @@ export default function TaskCard({ task }: Props) {
     });
   };
 
+  function formatDate(date: string) {
+    const [year, month, day] = date.split("T")[0].split("-");
+    const dateFormated = `${month}-${day}-${year}`;
+    return dateFormated;
+  }
 
   return (
     <Card
@@ -91,6 +96,12 @@ export default function TaskCard({ task }: Props) {
         </Typography>
         <Typography variant="body2" color="text.secondary">
           State: {task.state}
+        </Typography>
+        <Typography variant="body2" color="text.secondary">
+          Initial Date: {formatDate(task.initDate)}
+        </Typography>
+        <Typography variant="body2" color="text.secondary">
+          End Date: {formatDate(task.endDate)}
         </Typography>
       </CardContent>
       <CardActions

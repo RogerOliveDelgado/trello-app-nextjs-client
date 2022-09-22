@@ -16,8 +16,7 @@ import { tasksActions } from "../../../redux/slices/tasksSlice";
 import getBoards from "../../../services/getBoards";
 import { Boards } from "../../../interfaces/Board";
 import { useAppSelector } from "../../../redux/hooks";
-
-
+import Swal from "sweetalert2";
 
 type Props = {
   openModal: boolean;
@@ -86,6 +85,11 @@ export const TaskModal = ({ openModal, handleClose }: Props) => {
   const sendTextFieldValue = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const { data: tasks } = await createTaskReq(requestOptions);
+    Swal.fire({
+      icon: "success",
+      title: "Task created",
+      showConfirmButton: true,
+    });
     dispatch(tasksActions.addTask(tasks));
     handleClose();
   };
@@ -152,7 +156,7 @@ export const TaskModal = ({ openModal, handleClose }: Props) => {
               id="date"
               type="date"
               helperText="Select an end date"
-              sx={{ width: 200, marginTop: 2  }}
+              sx={{ width: 200, marginTop: 2 }}
               InputLabelProps={{
                 shrink: true,
               }}
@@ -164,7 +168,7 @@ export const TaskModal = ({ openModal, handleClose }: Props) => {
             select
             required
             label="State"
-            sx={{ width: "10rem", marginTop: 2  }}
+            sx={{ width: "10rem", marginTop: 2 }}
             onChange={(e) => setState(e.target.value)}
           >
             <MenuItem value="To do">To do</MenuItem>
@@ -178,7 +182,7 @@ export const TaskModal = ({ openModal, handleClose }: Props) => {
             select
             required
             label="Board"
-            sx={{ width: "10rem", marginTop: 2  }}
+            sx={{ width: "10rem", marginTop: 2 }}
           >
             {data.map((board) => (
               <MenuItem
