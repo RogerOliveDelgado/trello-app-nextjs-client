@@ -22,6 +22,7 @@ import { useAppDispatch } from "../../../store/hooks";
 import { useDispatch } from "react-redux";
 import { boardActions } from "../../../store/slices/boardSlice";
 import { EditBoardModel } from "../../modals/boardModal/EditBoardModal";
+import { Task } from "../../../interfaces/Task";
 
 interface ExpandMoreProps extends IconButtonProps {
   expand: boolean;
@@ -103,11 +104,12 @@ export default function BoardCard({ board }: Board) {
         }
       />
       <CardContent>
-        {board.tasks.map((task: string) => {
+        {board.tasks.map((task: Task) => {
           return (
-            <div key={task}>
+            <div key={task._id}>
+              <p>Tasks</p>
               <ul>
-                <li>{task}</li>
+                <li>{task.title}</li>
               </ul>
             </div>
           );
