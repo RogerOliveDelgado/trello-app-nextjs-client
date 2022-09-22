@@ -9,12 +9,44 @@ import EditIcon from "@mui/icons-material/Edit";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import IconButton, { IconButtonProps } from "@mui/material/IconButton";
 import Task from "../../../interfaces/Task";
+import Swal from "sweetalert2";
+import { useDispatch } from "react-redux";
+import { tasksActions } from "../../../redux/slices/tasksSlice";
+import deleteTaskReq from "../../../services/deleteTask";
 
 type Props = {
   task: any;
 };
 
-export default function TaskCard(props: Props) {
+const reqOptions = {
+  method: "DELETE",
+  headers: {
+    "Content-Type": "application/json",
+  },
+};
+
+export default function TaskCard({ task }: Props) {
+  const dispatch = useDispatch();
+
+  const taskId = task._id;
+
+  const deleteTask = async () => {
+    Swal.fire({
+      title: "Do you want to delete the task?",
+      showDenyButton: true,
+      confirmButtonText: "Delete",
+      denyButtonText: `Don't delete`,
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        const { data: delTask } = await deleteTaskReq(taskId, reqOptions);
+        dispatch(tasksActions.deleteTask(delTask));
+        Swal.fire("Deleted!", "", "success");
+      } else if (result.isDenied) {
+        Swal.fire("The task is not deleted", "", "info");
+      }
+    });
+  };
+
   return (
     <Card
       sx={{
@@ -29,7 +61,7 @@ export default function TaskCard(props: Props) {
         <CardHeader
           title={
             <Typography gutterBottom variant="h5" component="div">
-              {props.task.title}
+              {task.title}
             </Typography>
           }
           avatar={
@@ -43,10 +75,10 @@ export default function TaskCard(props: Props) {
           }
         />
         <Typography variant="body2" color="text.secondary">
-          {props.task.description}
+          {task.description}
         </Typography>
         <Typography variant="body2" color="text.secondary">
-          State: {props.task.state}
+          State: {task.state}
         </Typography>
       </CardContent>
       <CardActions
@@ -59,7 +91,7 @@ export default function TaskCard(props: Props) {
         <IconButton aria-label="add to favorites">
           <EditIcon />
         </IconButton>
-        <IconButton aria-label="share">
+        <IconButton aria-label="share" onClick={deleteTask}>
           <DeleteForeverIcon />
         </IconButton>
       </CardActions>

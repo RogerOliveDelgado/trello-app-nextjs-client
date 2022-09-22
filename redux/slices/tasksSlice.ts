@@ -28,6 +28,9 @@ export const tasksSlice = createSlice({
     addTask(state: TasksList, action: PayloadAction<Task>) {
       state.push(action.payload);
     },
+    deleteTask(state: TasksList, action: PayloadAction<Task>) {
+      state.push(action.payload);
+    },
   },
 });
 

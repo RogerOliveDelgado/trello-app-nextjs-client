@@ -179,7 +179,7 @@ export const TaskModal = ({ openModal, handleClose }: Props) => {
             defaultValue=""
             select
             required
-            label="User"
+            label="Board"
             sx={{ width: "10rem" }}
           >
             {data.map((board) => (
