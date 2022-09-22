@@ -7,7 +7,7 @@ import getBoards from "../../../services/getBoards";
 
 //Add type Props when Backend is ready
 import { Boards } from "../../../interfaces/Board";
-import { useAppSelector } from "../../../store/hooks";
+import { useAppSelector } from "../../../redux/hooks";
 
 const TasksLayout = () => {
   const boardList = useAppSelector((state) => state.boardList);

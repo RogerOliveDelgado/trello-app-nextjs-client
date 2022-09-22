@@ -14,9 +14,9 @@ import Swal from "sweetalert2";
 import getBoards from "../../../services/getBoards";
 
 import styles from "../../../styles/Dashboard.module.css";
-import { useAppDispatch } from "../../../store/hooks";
+import { useAppDispatch } from "../../../redux/hooks";
 import { useDispatch } from "react-redux";
-import { boardActions } from "../../../store/slices/boardSlice";
+import { boardActions } from "../../../redux/slices/boardSlice";
 
 type Props = {
   openModal: boolean;

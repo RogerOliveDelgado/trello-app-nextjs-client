@@ -11,8 +11,8 @@ import { editBoardReq } from "../../../services/editBoard";
 import Swal from "sweetalert2";
 
 import styles from "../../../styles/Dashboard.module.css";
-import { useAppDispatch } from "../../../store/hooks";
-import { boardActions } from "../../../store/slices/boardSlice";
+import { useAppDispatch } from "../../../redux/hooks";
+import { boardActions } from "../../../redux/slices/boardSlice";
 
 type Props = {
   openModal: boolean;

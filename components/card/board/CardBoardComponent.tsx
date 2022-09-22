@@ -18,9 +18,9 @@ import router from "next/router";
 
 import deleteBoards from "../../../services/deleteBoards";
 
-import { useAppDispatch } from "../../../store/hooks";
+import { useAppDispatch } from "../../../redux/hooks";
 import { useDispatch } from "react-redux";
-import { boardActions } from "../../../store/slices/boardSlice";
+import { boardActions } from "../../../redux/slices/boardSlice";
 import { EditBoardModel } from "../../modals/boardModal/EditBoardModal";
 import { Task } from "../../../interfaces/Task";
 
