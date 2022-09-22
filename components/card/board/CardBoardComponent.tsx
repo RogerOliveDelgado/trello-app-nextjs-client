@@ -21,6 +21,7 @@ import deleteBoards from "../../../services/deleteBoards";
 import { useAppDispatch } from "../../../store/hooks";
 import { useDispatch } from "react-redux";
 import { boardActions } from "../../../store/slices/boardSlice";
+import { EditBoardModel } from "../../modals/boardModal/EditBoardModal";
 
 interface ExpandMoreProps extends IconButtonProps {
   expand: boolean;
@@ -44,6 +45,16 @@ const reqOptions = {
   },
 };
 export default function BoardCard({ board }: Board) {
+  const [openModal, setOpenModal] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpenModal(true);
+  };
+
+  const handleClose = () => {
+    setOpenModal(false);
+  };
+
   const dispatch = useAppDispatch();
 
   const boardId = board._id;
@@ -105,10 +116,18 @@ export default function BoardCard({ board }: Board) {
         <IconButton aria-label="delete board" onClick={deleteBoard}>
           <DeleteIcon />
         </IconButton>
-        <IconButton aria-label="edit board">
+        <IconButton aria-label="edit board" onClick={handleClickOpen}>
           <EditIcon />
         </IconButton>
       </CardActions>
+
+      {openModal && (
+        <EditBoardModel
+          openModal={openModal}
+          handleClose={handleClose}
+          modalId={board._id}
+        />
+      )}
     </Card>
   );
 }

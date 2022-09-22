@@ -24,6 +24,9 @@ const boardSlice = createSlice({
     deleteBoard(state: BoardList, action: PayloadAction<Board>) {
       state.push(action.payload);
     },
+    updateBoard(state: BoardList, action: PayloadAction<Board>) {
+      state.push(action.payload);
+    },
   },
 });
 
