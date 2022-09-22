@@ -103,6 +103,7 @@ export const TaskModal = ({ openModal, handleClose }: Props) => {
       onClose={handleClose}
       sx={{
         "& .MuiDialog-paper": {
+          width: "50rem",
           maxWidth: "80rem",
         },
       }}
@@ -142,7 +143,11 @@ export const TaskModal = ({ openModal, handleClose }: Props) => {
               id="date"
               type="date"
               helperText="Select a start date"
-              sx={{ width: 200 }}
+              sx={{
+                width: 200,
+                marginRight: 4,
+                marginTop: 2,
+              }}
               InputLabelProps={{
                 shrink: true,
               }}
@@ -154,7 +159,7 @@ export const TaskModal = ({ openModal, handleClose }: Props) => {
               id="date"
               type="date"
               helperText="Select an end date"
-              sx={{ width: 200 }}
+              sx={{ width: 200, marginTop: 2  }}
               InputLabelProps={{
                 shrink: true,
               }}
@@ -166,7 +171,7 @@ export const TaskModal = ({ openModal, handleClose }: Props) => {
             select
             required
             label="State"
-            sx={{ width: "10rem" }}
+            sx={{ width: "10rem", marginTop: 2  }}
             onChange={(e) => setState(e.target.value)}
           >
             <MenuItem value="To do">To do</MenuItem>
@@ -180,7 +185,7 @@ export const TaskModal = ({ openModal, handleClose }: Props) => {
             select
             required
             label="Board"
-            sx={{ width: "10rem" }}
+            sx={{ width: "10rem", marginTop: 2  }}
           >
             {data.map((board) => (
               <MenuItem

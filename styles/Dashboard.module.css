@@ -18,7 +18,6 @@
 
 .top,
 .bot {
-  /* border: 1px solid red; */
   height: 13rem;
   display: flex;
   flex-direction: column;

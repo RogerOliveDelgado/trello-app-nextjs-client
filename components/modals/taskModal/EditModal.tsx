@@ -47,10 +47,6 @@ export const EditModal = ({ openModal, handleClose, task, taskId }: Props) => {
     ],
   });
 
-  useEffect(() => {
-    getBoards(setBoards);
-  }, [boardList]);
-
   const { data } = boards;
 
   const [title, setTitle] = useState(String);
@@ -71,6 +67,10 @@ export const EditModal = ({ openModal, handleClose, task, taskId }: Props) => {
   const endDay = endDate.split("-")[2];
   const endYear = endDate.split("-")[0];
   const endDateFormated = `${endMonth}-${endDay}-${endYear}`;
+
+  useEffect(() => {
+    getBoards(setBoards);
+  }, [boardList, board]);
 
   const dispatch = useDispatch();
 
@@ -101,6 +101,7 @@ export const EditModal = ({ openModal, handleClose, task, taskId }: Props) => {
       onClose={handleClose}
       sx={{
         "& .MuiDialog-paper": {
+          width: "50rem",
           maxWidth: "80rem",
         },
       }}
@@ -140,7 +141,11 @@ export const EditModal = ({ openModal, handleClose, task, taskId }: Props) => {
               id="date"
               type="date"
               helperText="Select a start date"
-              sx={{ width: 200 }}
+              sx={{
+                width: 200,
+                marginRight: 4,
+                marginTop: 2,
+              }}
               InputLabelProps={{
                 shrink: true,
               }}
@@ -152,7 +157,7 @@ export const EditModal = ({ openModal, handleClose, task, taskId }: Props) => {
               id="date"
               type="date"
               helperText="Select an end date"
-              sx={{ width: 200 }}
+              sx={{ width: 200, marginTop: 2 }}
               InputLabelProps={{
                 shrink: true,
               }}
@@ -164,7 +169,7 @@ export const EditModal = ({ openModal, handleClose, task, taskId }: Props) => {
             select
             required
             label="State"
-            sx={{ width: "10rem" }}
+            sx={{ width: "10rem", marginTop: 2 }}
             onChange={(e) => setState(e.target.value)}
           >
             <MenuItem value="To do">To do</MenuItem>
@@ -178,7 +183,8 @@ export const EditModal = ({ openModal, handleClose, task, taskId }: Props) => {
             select
             required
             label="Board"
-            sx={{ width: "10rem" }}
+            sx={{ width: "10rem", marginTop: 2 }}
+            onClick={() => getBoards(setBoards)}
           >
             {data.map((board) => (
               <MenuItem
@@ -193,6 +199,8 @@ export const EditModal = ({ openModal, handleClose, task, taskId }: Props) => {
 
           <TextField
             required
+            label="Description"
+            sx={{ marginTop: 5 }}
             defaultValue={task.description}
             id="outlined-multiline-static"
             multiline

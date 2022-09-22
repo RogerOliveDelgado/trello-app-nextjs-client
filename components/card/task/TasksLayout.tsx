@@ -46,11 +46,13 @@ const TasksLayout = () => {
     <>
       <main className={styles.main}>
         <section className={styles.section}>
-          {data.map((task) => {
-            return (
-              <TaskCard key={task._id} task={task} />
-            );
-          })}
+          {data.length > 0 ? (
+            data.map((task) => {
+              return <TaskCard key={task._id} task={task} />;
+            })
+          ) : (
+            <h1>No tasks</h1>
+          )}
         </section>
       </main>
     </>
