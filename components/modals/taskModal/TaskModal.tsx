@@ -119,6 +119,7 @@ export const TaskModal = ({ openModal, handleClose }: Props) => {
           <TextField
             required
             autoFocus
+            defaultValue=""
             margin="dense"
             id="name"
             label="Task Name"
@@ -137,6 +138,7 @@ export const TaskModal = ({ openModal, handleClose }: Props) => {
           >
             <TextField
               required
+              defaultValue=""
               id="date"
               type="date"
               helperText="Select a start date"
@@ -148,6 +150,7 @@ export const TaskModal = ({ openModal, handleClose }: Props) => {
             />
             <TextField
               required
+              defaultValue=""
               id="date"
               type="date"
               helperText="Select an end date"
@@ -159,6 +162,7 @@ export const TaskModal = ({ openModal, handleClose }: Props) => {
             />
           </Box>
           <TextField
+            defaultValue=""
             select
             required
             label="State"
@@ -172,6 +176,7 @@ export const TaskModal = ({ openModal, handleClose }: Props) => {
           <TextField
             helperText="Select a board"
             variant="outlined"
+            defaultValue=""
             select
             required
             label="User"
@@ -190,6 +195,7 @@ export const TaskModal = ({ openModal, handleClose }: Props) => {
 
           <TextField
             required
+            defaultValue=""
             id="outlined-multiline-static"
             label="Description"
             multiline
