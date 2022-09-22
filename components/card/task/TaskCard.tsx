@@ -13,6 +13,7 @@ import Swal from "sweetalert2";
 import { useDispatch } from "react-redux";
 import { tasksActions } from "../../../redux/slices/tasksSlice";
 import deleteTaskReq from "../../../services/deleteTask";
+import { EditModal } from "../../modals/taskModal/EditModal";
 
 type Props = {
   task: any;
@@ -26,6 +27,16 @@ const reqOptions = {
 };
 
 export default function TaskCard({ task }: Props) {
+  const [openModal, setOpenModal] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpenModal(true);
+  };
+
+  const handleClose = () => {
+    setOpenModal(false);
+  };
+
   const dispatch = useDispatch();
 
   const taskId = task._id;
@@ -46,7 +57,6 @@ export default function TaskCard({ task }: Props) {
       }
     });
   };
-
   return (
     <Card
       sx={{
@@ -75,7 +85,7 @@ export default function TaskCard({ task }: Props) {
           }
         />
         <Typography variant="body2" color="text.secondary">
-          {task.description}
+          {`"${task.description}"`}
         </Typography>
         <Typography variant="body2" color="text.secondary">
           State: {task.state}
@@ -88,13 +98,22 @@ export default function TaskCard({ task }: Props) {
           textAlign: "end",
         }}
       >
-        <IconButton aria-label="add to favorites">
+        <IconButton aria-label="edit task" onClick={handleClickOpen}>
           <EditIcon />
         </IconButton>
-        <IconButton aria-label="share" onClick={deleteTask}>
+        <IconButton aria-label="delete task" onClick={deleteTask}>
           <DeleteForeverIcon />
         </IconButton>
       </CardActions>
+
+      {openModal && (
+        <EditModal
+          openModal={openModal}
+          handleClose={handleClose}
+          task={task}
+          taskId={task._id}
+        />
+      )}
     </Card>
   );
 }
