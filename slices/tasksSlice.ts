@@ -31,6 +31,6 @@ export const tasksSlice = createSlice({
   },
 });
 
-export const TasksActions = tasksSlice.actions;
+export const tasksActions = tasksSlice.actions;
 
 export default tasksSlice;

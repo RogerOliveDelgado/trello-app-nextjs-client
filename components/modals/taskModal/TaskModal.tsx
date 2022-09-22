@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { SetStateAction, useEffect, useState } from "react";
 import {
   Button,
   Box,
@@ -14,7 +14,11 @@ import {
   Typography,
 } from "@mui/material";
 import QuillEditor from "./QuillEditor";
-import React from "react";
+import getTasks from "../../../services/getTasks";
+import { createTaskReq } from "../../../services/createTask";
+import { useAppDispatch } from "../../../redux/hooks";
+import { useDispatch } from "react-redux";
+import { tasksActions } from "../../../slices/tasksSlice";
 
 import styles from "../../../styles/Dashboard.module.css";
 
@@ -41,30 +45,35 @@ const sendData = async (data: taskData) => {
 };
 
 export const TaskModal = ({ openModal, handleClose }: Props) => {
-  const url = "https://trello-app-express-server.vercel.app/board";
-  const [boards, setBoards] = useState([]);
+  const [title, setTitle] = useState(String);
+  const [description, setDescription] = useState(String);
+  const [board, setBoard] = useState(String);
+  const [initDate, setInitDate] = useState(
+    new Date().toISOString().slice(0, 10)
+  );
+  const [endDate, setEndDate] = useState(new Date().toISOString().slice(0, 10));
+  const [state, setState] = useState("Todo");
 
-  async function fetchBoards() {
-    const req = await fetch(url);
-    const res = await req.json();
-    setBoards(res);
-  }
+  const dispatch = useDispatch();
 
-  useEffect(() => {
-    fetchBoards();
-  }, [url]);
+  const requestOptions = {
+    mode: "cors",
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      title: title,
+      description: description,
+      board: board,
+      initDate: initDate,
+      endDate: endDate,
+      state: state,
+    }),
+  };
 
-  console.log(boards);
+  const sendTextFieldValue = async () => {
+    const { data: tasks } = await createTaskReq(requestOptions);
+    //dispatch(tasksActions.addTask(tasks));
 
-  const [titleTask, setTitleTask] = useState(String);
-  const [descriptionValue, setDescriptionValue] = useState(String);
-
-  const sendTextFieldValue = () => {
-    const taskData: taskData = {
-      title: titleTask,
-      description: descriptionValue,
-    };
-    sendData(taskData);
     handleClose();
   };
 
@@ -98,7 +107,7 @@ export const TaskModal = ({ openModal, handleClose }: Props) => {
             fullWidth
             variant="outlined"
             sx={{ width: 200 }}
-            onChange={(e) => setTitleTask(e.target.value)}
+            onChange={(e) => setTitle(e.target.value)}
           />
           <Box
             sx={{
@@ -115,6 +124,7 @@ export const TaskModal = ({ openModal, handleClose }: Props) => {
               InputLabelProps={{
                 shrink: true,
               }}
+              onChange={(e) => setInitDate(e.target.value)}
             />
             <TextField
               required
@@ -125,20 +135,22 @@ export const TaskModal = ({ openModal, handleClose }: Props) => {
               InputLabelProps={{
                 shrink: true,
               }}
+              onChange={(e) => setEndDate(e.target.value)}
             />
           </Box>
-          {/* <TextField
+          <TextField
             select
             required
             label="State"
             helperText="Select a state"
             sx={{ width: "10rem" }}
+            onChange={(e) => setState(e.target.value)}
           >
             <MenuItem value="To do">To do</MenuItem>
             <MenuItem value="In progress">In progress</MenuItem>
             <MenuItem value="Done">Done</MenuItem>
           </TextField>
-          <TextField
+          {/* <TextField
             select
             required
             label="User"
@@ -158,8 +170,8 @@ export const TaskModal = ({ openModal, handleClose }: Props) => {
             Description:
           </Typography>
           <QuillEditor
-            value={descriptionValue}
-            onChange={setDescriptionValue}
+            value={description}
+            onChange={setDescription}
             className={styles.TextContent}
           />
         </DialogContent>

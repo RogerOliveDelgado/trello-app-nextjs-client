@@ -41,7 +41,6 @@ const TasksLayout = () => {
   }, [tasksList]);
 
   const { data } = tasks;
-  console.log(data);
 
   return (
     <>
@@ -49,55 +48,7 @@ const TasksLayout = () => {
         <section className={styles.section}>
           {data.map((task) => {
             return (
-              <Card
-                key={task._id}
-                sx={{
-                  width: 300,
-                  minWidth: 250,
-                  maxWidth: 345,
-                  margin: "1rem",
-                  padding: ".5rem",
-                }}
-              >
-                <CardContent>
-                  <CardHeader
-                    title={
-                      <Typography gutterBottom variant="h5" component="div">
-                        {task.title}
-                      </Typography>
-                    }
-                    avatar={
-                      <Avatar
-                        sx={{
-                          bgcolor: "blueviolet",
-                        }}
-                      >
-                        J
-                      </Avatar>
-                    }
-                  />
-                  <Typography variant="body2" color="text.secondary">
-                    {task.description}
-                  </Typography>
-                  <Typography variant="body2" color="text.secondary">
-                    State: {task.state}
-                  </Typography>
-                </CardContent>
-                <CardActions
-                  disableSpacing
-                  sx={{
-                    display: "block",
-                    textAlign: "end",
-                  }}
-                >
-                  <IconButton aria-label="add to favorites">
-                    <EditIcon />
-                  </IconButton>
-                  <IconButton aria-label="share">
-                    <DeleteForeverIcon />
-                  </IconButton>
-                </CardActions>
-              </Card>
+              <TaskCard key={task._id} task={task} />
             );
           })}
         </section>
