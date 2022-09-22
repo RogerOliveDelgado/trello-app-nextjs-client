@@ -86,6 +86,7 @@ export const EditModal = ({ openModal, handleClose, task, taskId }: Props) => {
   const editTask = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const { data: tasks } = await editTaskReq(requestOptions, taskId);
+    console.log(tasks);
     dispatch(tasksActions.editTask(tasks));
     handleClose();
   };

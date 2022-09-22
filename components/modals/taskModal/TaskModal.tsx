@@ -171,7 +171,7 @@ export const TaskModal = ({ openModal, handleClose }: Props) => {
             sx={{ width: "10rem", marginTop: 2 }}
             onChange={(e) => setState(e.target.value)}
           >
-            <MenuItem value="To do">To do</MenuItem>
+            <MenuItem value="Todo">Todo</MenuItem>
             <MenuItem value="In progress">In progress</MenuItem>
             <MenuItem value="Done">Done</MenuItem>
           </TextField>
