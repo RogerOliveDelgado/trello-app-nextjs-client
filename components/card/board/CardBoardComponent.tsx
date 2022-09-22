@@ -11,6 +11,8 @@ import { red } from "@mui/material/colors";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 
+import Swal from "sweetalert2";
+
 import { Board } from "../../../interfaces/Board";
 import router from "next/router";
 
@@ -49,8 +51,21 @@ export default function BoardCard({ board }: Board) {
   const date = board.initDate?.split("T")[0];
 
   const deleteBoard = async () => {
-    const { data: delboard } = await deleteBoards(boardId, reqOptions);
-    dispatch(boardActions.deleteBoard(delboard));
+    Swal.fire({
+      title: "Do you want to delete the board?",
+      showDenyButton: true,
+      confirmButtonText: "Delete",
+      denyButtonText: `Don't delete`,
+    }).then(async (result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+        const { data: delboard } = await deleteBoards(boardId, reqOptions);
+        dispatch(boardActions.deleteBoard(delboard));
+        Swal.fire("Deleted!", "", "success");
+      } else if (result.isDenied) {
+        Swal.fire("The board is not deleted", "", "info");
+      }
+    });
   };
 
   return (

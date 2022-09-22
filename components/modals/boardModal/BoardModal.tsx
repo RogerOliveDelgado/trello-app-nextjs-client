@@ -9,12 +9,13 @@ import {
 import router from "next/router";
 import { SetStateAction, useEffect, useState } from "react";
 import { createBoardReq } from "../../../services/createBoard";
+import Swal from "sweetalert2";
 
 import getBoards from "../../../services/getBoards";
 
 import styles from "../../../styles/Dashboard.module.css";
-import { useAppDispatch } from '../../../store/hooks';
-import { useDispatch } from 'react-redux';
+import { useAppDispatch } from "../../../store/hooks";
+import { useDispatch } from "react-redux";
 import { boardActions } from "../../../store/slices/boardSlice";
 
 type Props = {
@@ -23,9 +24,8 @@ type Props = {
 };
 
 export const BoardModel = ({ openModal, handleClose }: Props) => {
-
   const [TextFieldValue, setTextFieldValue] = useState(String);
-  const dispatch = useAppDispatch()
+  const dispatch = useAppDispatch();
 
   const date = new Date();
   const month = date.getMonth() + 1;
@@ -49,8 +49,13 @@ export const BoardModel = ({ openModal, handleClose }: Props) => {
   };
 
   const sendTextFieldValue = async () => {
-    const {data: board} = await createBoardReq(requestOptions);
-    dispatch(boardActions.addBoard(board))
+    const { data: board } = await createBoardReq(requestOptions);
+    Swal.fire({
+      icon: "success",
+      title: "Board created",
+      showConfirmButton: true,
+    });
+    dispatch(boardActions.addBoard(board));
     handleClose();
   };
 
