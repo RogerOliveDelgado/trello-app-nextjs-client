@@ -1,20 +1,25 @@
-import User from './User';
-import Board from './Board';
+import User from "./User";
 
-export default interface Task {
+export default interface Response {
+  data: Task[];
+}
+
+export type Task = {
+  _id: string;
   title: string;
   description: string;
   employees: User[];
-  initDate: Date;
-  endDate: Date;
-  boardRefID: Board;
+  initDate: string;
+  endDate: string;
+  board: string;
   state: TaskState;
   tags?: Tag[];
-}
+};
+
 export type Tag = {
   title: string;
   color: Color;
 };
 
-type TaskState = 'Todo' | 'In progress' | 'Done';
-type Color = 'Red' | 'Green' | 'Yellow';
+export type TaskState = "Todo" | "In progress" | "Done";
+type Color = "Red" | "Green" | "Yellow";

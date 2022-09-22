@@ -1,12 +1,13 @@
 import React from "react";
 import DashboardContent from "../components/dashboard/DashboardContent";
+import Task from "../interfaces/Task";
 
-type Props = {};
 
-const tasks = (props: Props) => {
+
+const tasks = () => {
   return (
     <>
-      <DashboardContent/>
+      <DashboardContent />
     </>
   );
 };

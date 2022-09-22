@@ -1,4 +1,4 @@
-import React, { SetStateAction, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Button,
   Box,
@@ -10,26 +10,22 @@ import {
   MenuItem,
   TextField,
 } from "@mui/material";
-import { createTaskReq } from "../../../services/createTask";
 import { useDispatch } from "react-redux";
 import { tasksActions } from "../../../redux/slices/tasksSlice";
 import getBoards from "../../../services/getBoards";
 import { Boards } from "../../../interfaces/Board";
 import { useAppSelector } from "../../../redux/hooks";
-
-
+import { editTaskReq } from "../../../services/editTask";
+import { Task } from "../../../interfaces/Task";
 
 type Props = {
   openModal: boolean;
   handleClose: () => void;
+  task: Task;
+  taskId: string;
 };
 
-type taskData = {
-  title: string;
-  description: string;
-};
-
-export const TaskModal = ({ openModal, handleClose }: Props) => {
+export const EditModal = ({ openModal, handleClose, task, taskId }: Props) => {
   const boardList = useAppSelector((state) => state.boardList);
   const [boards, setBoards] = useState<Boards>({
     data: [
@@ -42,20 +38,14 @@ export const TaskModal = ({ openModal, handleClose }: Props) => {
     ],
   });
 
-  useEffect(() => {
-    getBoards(setBoards);
-  }, [boardList]);
-
   const { data } = boards;
 
-  const [title, setTitle] = useState(String);
-  const [description, setDescription] = useState(String);
+  const [title, setTitle] = useState(task.title);
+  const [description, setDescription] = useState(task.description);
   const [board, setBoard] = useState(String);
-  const [initDate, setInitDate] = useState(
-    new Date().toISOString().slice(0, 10)
-  );
-  const [endDate, setEndDate] = useState(new Date().toISOString().slice(0, 10));
-  const [state, setState] = useState("Todo");
+  const [initDate, setInitDate] = useState(formatDate(task.initDate));
+  const [endDate, setEndDate] = useState(formatDate(task.endDate));
+  const [state, setState] = useState(String);
 
   const initMonth = initDate.split("-")[1];
   const initDay = initDate.split("-")[2];
@@ -67,11 +57,21 @@ export const TaskModal = ({ openModal, handleClose }: Props) => {
   const endYear = endDate.split("-")[0];
   const endDateFormated = `${endMonth}-${endDay}-${endYear}`;
 
+  function formatDate(date: string) {
+    const [year, month, day] = date.split("T")[0].split("-");
+    const dateFormated = `${month}-${day}-${year}`;
+    return dateFormated;
+  }
+
+  useEffect(() => {
+    getBoards(setBoards);
+  }, [boardList, board]);
+
   const dispatch = useDispatch();
 
   const requestOptions = {
     mode: "cors",
-    method: "POST",
+    method: "PATCH",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
       title: title,
@@ -83,10 +83,10 @@ export const TaskModal = ({ openModal, handleClose }: Props) => {
     }),
   };
 
-  const sendTextFieldValue = async (e: React.FormEvent<HTMLFormElement>) => {
+  const editTask = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const { data: tasks } = await createTaskReq(requestOptions);
-    dispatch(tasksActions.addTask(tasks));
+    const { data: tasks } = await editTaskReq(requestOptions, taskId);
+    dispatch(tasksActions.editTask(tasks));
     handleClose();
   };
 
@@ -101,8 +101,8 @@ export const TaskModal = ({ openModal, handleClose }: Props) => {
         },
       }}
     >
-      <DialogTitle>Add Task</DialogTitle>
-      <FormControl component="form" onSubmit={sendTextFieldValue}>
+      <DialogTitle>Edit Task</DialogTitle>
+      <FormControl component="form" onSubmit={editTask}>
         <DialogContent
           sx={{
             display: "flex",
@@ -113,7 +113,7 @@ export const TaskModal = ({ openModal, handleClose }: Props) => {
           <TextField
             required
             autoFocus
-            defaultValue=""
+            defaultValue={task.title}
             margin="dense"
             id="name"
             label="Task Name"
@@ -132,7 +132,7 @@ export const TaskModal = ({ openModal, handleClose }: Props) => {
           >
             <TextField
               required
-              defaultValue=""
+              defaultValue={task.initDate.split("T")[0]}
               id="date"
               type="date"
               helperText="Select a start date"
@@ -148,11 +148,11 @@ export const TaskModal = ({ openModal, handleClose }: Props) => {
             />
             <TextField
               required
-              defaultValue=""
+              defaultValue={task.endDate.split("T")[0]}
               id="date"
               type="date"
               helperText="Select an end date"
-              sx={{ width: 200, marginTop: 2  }}
+              sx={{ width: 200, marginTop: 2 }}
               InputLabelProps={{
                 shrink: true,
               }}
@@ -160,11 +160,11 @@ export const TaskModal = ({ openModal, handleClose }: Props) => {
             />
           </Box>
           <TextField
-            defaultValue=""
+            defaultValue={task.state}
             select
             required
             label="State"
-            sx={{ width: "10rem", marginTop: 2  }}
+            sx={{ width: "10rem", marginTop: 2 }}
             onChange={(e) => setState(e.target.value)}
           >
             <MenuItem value="To do">To do</MenuItem>
@@ -178,7 +178,8 @@ export const TaskModal = ({ openModal, handleClose }: Props) => {
             select
             required
             label="Board"
-            sx={{ width: "10rem", marginTop: 2  }}
+            sx={{ width: "10rem", marginTop: 2 }}
+            onClick={() => getBoards(setBoards)}
           >
             {data.map((board) => (
               <MenuItem
@@ -193,9 +194,10 @@ export const TaskModal = ({ openModal, handleClose }: Props) => {
 
           <TextField
             required
-            defaultValue=""
-            id="outlined-multiline-static"
             label="Description"
+            sx={{ marginTop: 5 }}
+            defaultValue={task.description}
+            id="outlined-multiline-static"
             multiline
             rows={4}
             variant="outlined"
@@ -204,7 +206,7 @@ export const TaskModal = ({ openModal, handleClose }: Props) => {
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
-          <Button type="submit">Save</Button>
+          <Button type="submit">CONFIRM EDIT</Button>
         </DialogActions>
       </FormControl>
     </Dialog>

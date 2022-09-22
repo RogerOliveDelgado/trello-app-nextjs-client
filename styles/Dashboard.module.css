@@ -10,15 +10,14 @@
 }
 
 .section {
-  display: flex;
-  justify-content: space-around;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+  justify-items: center;
   margin-top: 1rem;
 }
 
 .top,
 .bot {
-  /* border: 1px solid red; */
   height: 13rem;
   display: flex;
   flex-direction: column;

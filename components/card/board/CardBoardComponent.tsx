@@ -82,7 +82,8 @@ export default function BoardCard({ board }: Board) {
   return (
     <Card
       sx={{
-        minWidth: 200,
+        width: 300,
+        minWidth: 250,
         maxWidth: 345,
         margin: "1rem",
         padding: ".5rem",
