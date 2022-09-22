@@ -85,8 +85,8 @@ export const TaskModal = ({ openModal, handleClose }: Props) => {
       title: title,
       description: description,
       board: board,
-      initDate: initDate,
-      endDate: endDate,
+      initDate: initDateFormated,
+      endDate: endDateFormated,
       state: state,
     }),
   };
