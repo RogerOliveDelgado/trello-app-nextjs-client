@@ -8,12 +8,17 @@ import Avatar from "@mui/material/Avatar";
 import IconButton, { IconButtonProps } from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import { red } from "@mui/material/colors";
-import FavoriteIcon from "@mui/icons-material/Favorite";
-import ShareIcon from "@mui/icons-material/Share";
-import MoreVertIcon from "@mui/icons-material/MoreVert";
+import DeleteIcon from "@mui/icons-material/Delete";
+import EditIcon from "@mui/icons-material/Edit";
 
 import { Board } from "../../../interfaces/Board";
 import router from "next/router";
+
+import deleteBoards from "../../../services/deleteBoards";
+
+import { useAppDispatch } from "../../../store/hooks";
+import { useDispatch } from "react-redux";
+import { boardActions } from "../../../store/slices/boardSlice";
 
 interface ExpandMoreProps extends IconButtonProps {
   expand: boolean;
@@ -30,8 +35,23 @@ const ExpandMore = styled((props: ExpandMoreProps) => {
   }),
 }));
 
+const reqOptions = {
+  method: "DELETE",
+  headers: {
+    "Content-Type": "application/json",
+  },
+};
 export default function BoardCard({ board }: Board) {
+  const dispatch = useAppDispatch();
+
+  const boardId = board._id;
+
   const date = board.initDate?.split("T")[0];
+
+  const deleteBoard = async () => {
+    const { data: delboard } = await deleteBoards(boardId, reqOptions);
+    dispatch(boardActions.deleteBoard(delboard));
+  };
 
   return (
     <Card
@@ -47,11 +67,6 @@ export default function BoardCard({ board }: Board) {
           <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
             {board.name[0]}
           </Avatar>
-        }
-        action={
-          <IconButton aria-label="settings">
-            <MoreVertIcon />
-          </IconButton>
         }
         title={board.name}
         subheader={
@@ -72,11 +87,11 @@ export default function BoardCard({ board }: Board) {
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
-        <IconButton aria-label="add to favorites">
-          <FavoriteIcon />
+        <IconButton aria-label="delete board" onClick={deleteBoard}>
+          <DeleteIcon />
         </IconButton>
-        <IconButton aria-label="share">
-          <ShareIcon />
+        <IconButton aria-label="edit board">
+          <EditIcon />
         </IconButton>
       </CardActions>
     </Card>

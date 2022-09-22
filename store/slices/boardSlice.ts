@@ -4,24 +4,27 @@ import { CreateSliceOptions } from "@reduxjs/toolkit";
 //We should call the API/backend to carry the information
 
 export interface Board {
-    _id: string;
-    name: string;
-    tasks: [];
-    initDate?: string;
+  _id: string;
+  name: string;
+  tasks: [];
+  initDate?: string;
 }
 
-type BoardList = Board[]
+type BoardList = Board[];
 
-const initialDataState: BoardList = []
+const initialDataState: BoardList = [];
 
 const boardSlice = createSlice({
-    name: "boardList",
-    initialState: initialDataState,
-    reducers: {
-        addBoard(state: BoardList, action: PayloadAction<Board>) {
-            state.push(action.payload)
-        },
+  name: "boardList",
+  initialState: initialDataState,
+  reducers: {
+    addBoard(state: BoardList, action: PayloadAction<Board>) {
+      state.push(action.payload);
     },
+    deleteBoard(state: BoardList, action: PayloadAction<Board>) {
+      state.push(action.payload);
+    },
+  },
 });
 
 export const boardActions = boardSlice.actions;
