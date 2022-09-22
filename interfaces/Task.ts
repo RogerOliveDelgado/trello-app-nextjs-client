@@ -1,10 +1,9 @@
 import User from "./User";
-import Board from "./Board";
 
 export default interface Task {
   data: [
     {
-       _id: string;
+      _id: string;
       title: string;
       description: string;
       employees: User[];

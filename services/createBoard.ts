@@ -7,6 +7,13 @@ type Options = {
 };
 
 export const createBoardReq = async (requestOptions: Options) => {
-  const req = await fetch("http://localhost:4000/board", requestOptions);
+  const req = await fetch(
+    "https://trello-app-express-server.vercel.app/board",
+    requestOptions
+  );
   const res = await req.json();
+
+  console.log(res);
+
+  return res;
 };

@@ -18,7 +18,10 @@ import getTasks from "../../../services/getTasks";
 import { createTaskReq } from "../../../services/createTask";
 import { useAppDispatch } from "../../../redux/hooks";
 import { useDispatch } from "react-redux";
-import { tasksActions } from "../../../slices/tasksSlice";
+import { tasksActions } from "../../../redux/slices/tasksSlice";
+import getBoards from "../../../services/getBoards";
+import { Boards } from "../../../interfaces/Board";
+import { useAppSelector } from "../../../redux/hooks";
 
 import styles from "../../../styles/Dashboard.module.css";
 
@@ -34,17 +37,27 @@ type taskData = {
   description: string;
 };
 
-const sendData = async (data: taskData) => {
-  await fetch("http://localhost:3000/api/tasks", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(data),
-  });
-};
+
 
 export const TaskModal = ({ openModal, handleClose }: Props) => {
+  const boardList = useAppSelector((state) => state.boardList);
+  const [boards, setBoards] = useState<Boards>({
+    data: [
+      {
+        _id: "",
+        name: "",
+        tasks: [],
+        initDate: "",
+      },
+    ],
+  });
+
+  useEffect(() => {
+    getBoards(setBoards);
+  }, [boardList]);
+
+  const { data } = boards;
+
   const [title, setTitle] = useState(String);
   const [description, setDescription] = useState(String);
   const [board, setBoard] = useState(String);
@@ -53,6 +66,18 @@ export const TaskModal = ({ openModal, handleClose }: Props) => {
   );
   const [endDate, setEndDate] = useState(new Date().toISOString().slice(0, 10));
   const [state, setState] = useState("Todo");
+
+  const initMonth = initDate.split("-")[1];
+  const initDay = initDate.split("-")[2];
+  const initYear = initDate.split("-")[0];
+  const initDateFormated = `${initMonth}-${initDay}-${initYear}`;
+
+  const endMonth = endDate.split("-")[1];
+  const endDay = endDate.split("-")[2];
+  const endYear = endDate.split("-")[0];
+  const endDateFormated = `${endMonth}-${endDay}-${endYear}`;
+
+
 
   const dispatch = useDispatch();
 
@@ -72,8 +97,7 @@ export const TaskModal = ({ openModal, handleClose }: Props) => {
 
   const sendTextFieldValue = async () => {
     const { data: tasks } = await createTaskReq(requestOptions);
-    //dispatch(tasksActions.addTask(tasks));
-
+    dispatch(tasksActions.addTask(tasks));
     handleClose();
   };
 
@@ -150,17 +174,23 @@ export const TaskModal = ({ openModal, handleClose }: Props) => {
             <MenuItem value="In progress">In progress</MenuItem>
             <MenuItem value="Done">Done</MenuItem>
           </TextField>
-          {/* <TextField
+          <TextField
             select
             required
             label="User"
-            helperText="Assign to a user"
+            helperText="Assign the task to a board"
             sx={{ width: "10rem" }}
           >
-            <MenuItem value="To do">To do</MenuItem>
-            <MenuItem value="In progress">In progress</MenuItem>
-            <MenuItem value="Done">Done</MenuItem>
-          </TextField> */}
+            {data.map((board) => (
+              <MenuItem
+                key={board._id}
+                value={board.name}
+                onClick={() => setBoard(board._id)}
+              >
+                {board.name}
+              </MenuItem>
+            ))}
+          </TextField>
           <Typography
             variant="h6"
             sx={{
