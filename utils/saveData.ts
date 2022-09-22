@@ -15,3 +15,8 @@ export const saveDataInJson = (user: User): void => {
     }
   );
 };
+
+export const saveTokenInLStorage = (token: string): void => {
+  localStorage.setItem('token_type', 'Barear');
+  localStorage.setItem('access_token', token);
+};

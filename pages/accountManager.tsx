@@ -24,6 +24,7 @@ import AccountDetails from '../components/accountDetails/accountDetails';
 import UsersTable from '../components/usersTable/UsersTable';
 import UsersToolbar from '../components/usersToolbar/UsersToolbar';
 import styles from '../styles/Dashboard.module.css';
+import UserAvatar from '../components/avatar/UserAvatar';
 
 const drawerWidth: number = 240;
 
@@ -124,6 +125,7 @@ function DashboardContent() {
                   <NotificationsIcon />
                 </Badge>
               </IconButton>
+              <UserAvatar />
             </Toolbar>
           </AppBar>
           <Drawer variant="permanent" open={open}>

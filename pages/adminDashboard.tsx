@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { useContext, useState, useEffect } from 'react';
 import { styled, createTheme, ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import MuiDrawer from '@mui/material/Drawer';
@@ -19,7 +19,9 @@ import styles from '../styles/Dashboard.module.css';
 import Head from 'next/head';
 import UsersToolbar from '../components/usersToolbar/UsersToolbar';
 import UsersTable from '../components/usersTable/UsersTable';
-
+import UserAvatar from '../components/avatar/UserAvatar';
+import { UserContext } from '../contexts/UserContext';
+import { useRouter } from 'next/router';
 const drawerWidth: number = 240;
 
 interface AppBarProps extends MuiAppBarProps {
@@ -73,7 +75,8 @@ const Drawer = styled(MuiDrawer, {
 const mdTheme = createTheme();
 
 function DashboardContent() {
-  const [open, setOpen] = React.useState(true);
+  const [open, setOpen] = useState(true);
+
   const toggleDrawer = () => {
     setOpen(!open);
   };
@@ -114,6 +117,7 @@ function DashboardContent() {
                 <NotificationsIcon />
               </Badge>
             </IconButton>
+            <UserAvatar />
             {/* Aquí irán los iconos de logout etc */}
           </Toolbar>
         </AppBar>
@@ -158,7 +162,16 @@ function DashboardContent() {
   );
 }
 
-export default function adminDashboard() {
+export default function AdminDashboard() {
+  const { userData } = useContext(UserContext);
+  const router = useRouter();
+
+  useEffect(() => {
+    if (userData.role === 'user') {
+      router.push('/userDashbaord');
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   return (
     <>
       <Head>
