@@ -17,11 +17,17 @@ import { boardActions } from "../../../store/slices/boardSlice";
 type Props = {
   openModal: boolean;
   handleClose: () => void;
-  modalId: string;
+  boardId: string;
+  boardName: string;
 };
 
-export const EditBoardModel = ({ openModal, handleClose, modalId }: Props) => {
-  const [TextFieldValue, setTextFieldValue] = useState(String);
+export const EditBoardModel = ({
+  openModal,
+  handleClose,
+  boardId,
+  boardName,
+}: Props) => {
+  const [TextFieldValue, setTextFieldValue] = useState(boardName);
   const dispatch = useAppDispatch();
 
   const getTextFieldValue = (e: SetStateAction<string>) => {
@@ -38,7 +44,7 @@ export const EditBoardModel = ({ openModal, handleClose, modalId }: Props) => {
   };
 
   const sendTextFieldValue = async () => {
-    const { data: board } = await editBoardReq(requestOptions, modalId);
+    const { data: board } = await editBoardReq(requestOptions, boardId);
     Swal.fire({
       icon: "success",
       title: "Board updated",
@@ -57,6 +63,7 @@ export const EditBoardModel = ({ openModal, handleClose, modalId }: Props) => {
       <DialogTitle>Edit board</DialogTitle>
       <DialogContent>
         <TextField
+          defaultValue={boardName}
           autoFocus
           margin="dense"
           id="name"

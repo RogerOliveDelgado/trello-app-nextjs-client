@@ -102,15 +102,15 @@ export default function BoardCard({ board }: Board) {
         }
       />
       <CardContent>
-        <Typography variant="body2" color="text.secondary">
-          {board.tasks.map((task: any) => {
-            return (
-              <ul key={task.id}>
-                <li>{task.name}</li>
+        {board.tasks.map((task: string) => {
+          return (
+            <div key={task}>
+              <ul>
+                <li>{task}</li>
               </ul>
-            );
-          })}
-        </Typography>
+            </div>
+          );
+        })}
       </CardContent>
       <CardActions disableSpacing>
         <IconButton aria-label="delete board" onClick={deleteBoard}>
@@ -125,7 +125,8 @@ export default function BoardCard({ board }: Board) {
         <EditBoardModel
           openModal={openModal}
           handleClose={handleClose}
-          modalId={board._id}
+          boardId={board._id}
+          boardName={board.name}
         />
       )}
     </Card>

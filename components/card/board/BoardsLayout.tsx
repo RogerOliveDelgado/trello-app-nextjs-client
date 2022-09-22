@@ -27,20 +27,23 @@ const TasksLayout = () => {
   }, [boardList]);
 
   const { data } = boards;
-  console.log(data);
 
   return (
     <main className={styles.main}>
       <section className={styles.section}>
         {
           <>
-            {data.map((board) => {
-              return (
-                <div key={board._id}>
-                  <BoardCard board={board} />
-                </div>
-              );
-            })}
+            {data.length > 0 ? (
+              data.map((board) => {
+                return (
+                  <div key={board._id}>
+                    <BoardCard board={board} />
+                  </div>
+                );
+              })
+            ) : (
+              <h1>Doesn`t exist boards</h1>
+            )}
           </>
         }
       </section>
