@@ -42,10 +42,10 @@ export const EditModal = ({ openModal, handleClose, task, taskId }: Props) => {
 
   const [title, setTitle] = useState(task.title);
   const [description, setDescription] = useState(task.description);
-  const [board, setBoard] = useState(String);
+  const [board, setBoard] = useState(task.board);
   const [initDate, setInitDate] = useState(formatDate(task.initDate));
   const [endDate, setEndDate] = useState(formatDate(task.endDate));
-  const [state, setState] = useState(String);
+  const [state, setState] = useState(task.state);
 
   const initMonth = initDate.split("-")[1];
   const initDay = initDate.split("-")[2];
@@ -59,7 +59,7 @@ export const EditModal = ({ openModal, handleClose, task, taskId }: Props) => {
 
   function formatDate(date: string) {
     const [year, month, day] = date.split("T")[0].split("-");
-    const dateFormated = `${month}-${day}-${year}`;
+    const dateFormated = `${year}-${month}-${day}`;
     return dateFormated;
   }
 
@@ -133,7 +133,7 @@ export const EditModal = ({ openModal, handleClose, task, taskId }: Props) => {
           >
             <TextField
               required
-              defaultValue={task.initDate.split("T")[0]}
+              defaultValue={initDate}
               id="date"
               type="date"
               helperText="Select a start date"
@@ -149,7 +149,7 @@ export const EditModal = ({ openModal, handleClose, task, taskId }: Props) => {
             />
             <TextField
               required
-              defaultValue={task.endDate.split("T")[0]}
+              defaultValue={endDate}
               id="date"
               type="date"
               helperText="Select an end date"
