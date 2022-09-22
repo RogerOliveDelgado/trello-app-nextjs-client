@@ -90,8 +90,6 @@ export const EditModal = ({ openModal, handleClose, task, taskId }: Props) => {
     handleClose();
   };
 
-
-
   return (
     <Dialog
       open={openModal}
@@ -176,7 +174,7 @@ export const EditModal = ({ openModal, handleClose, task, taskId }: Props) => {
           <TextField
             helperText="Select a board"
             variant="outlined"
-            defaultValue={task.board}
+            defaultValue=""
             select
             required
             label="Board"
