@@ -9,10 +9,17 @@ import {
   Typography,
 } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
+import { useState } from 'react';
+import ConfirmationModal from '../modals/confirmationModal/ConfirmationModal';
 
 type Props = {};
 
 const UsersToolbar = (props: Props) => {
+  const [open, setOpen] = useState<boolean>(false);
+
+  const dialogToggle = () => {
+    setOpen(!open);
+  };
   return (
     <>
       <Box {...props}>
@@ -29,7 +36,7 @@ const UsersToolbar = (props: Props) => {
             Users
           </Typography>
           <Box sx={{ m: 1 }}>
-            <Button color="primary" variant="contained">
+            <Button color="primary" variant="contained" onClick={dialogToggle}>
               Add User
             </Button>
           </Box>
@@ -57,6 +64,7 @@ const UsersToolbar = (props: Props) => {
           </Card>
         </Box>
       </Box>
+      <ConfirmationModal open={open} handleClose={dialogToggle} />
     </>
   );
 };

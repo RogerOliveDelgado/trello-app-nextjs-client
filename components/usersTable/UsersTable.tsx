@@ -11,8 +11,9 @@ import {
   TableRow,
   Typography,
   MenuItem,
+  Button,
 } from '@mui/material';
-import UsersList from '../../data/usersArr.json';
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import { getInitials } from '../../utils/getInitials';
 import User from '../../interfaces/User';
 import { getUsersList } from '../../services/getAllUsers';
@@ -21,7 +22,7 @@ import TableSkeleton from '../tableSkeleton/TableSkeleton';
 type Props = {};
 const UsersTable = (props: Props) => {
   const [usersList, setUsersList] = useState<User[] | null>([]);
-  console.log(usersList);
+
   useEffect(() => {
     getUsers();
   }, []);
@@ -45,6 +46,7 @@ const UsersTable = (props: Props) => {
                       <TableCell>Email</TableCell>
                       <TableCell>Location</TableCell>
                       <TableCell>Role</TableCell>
+                      <TableCell>Action</TableCell>
                     </TableRow>
                   </TableHead>
                   <TableBody>
@@ -78,6 +80,11 @@ const UsersTable = (props: Props) => {
                             <MenuItem value={'admin'}>Admin</MenuItem>
                             <MenuItem value={'user'}>User</MenuItem>
                           </Select>
+                        </TableCell>
+                        <TableCell>
+                          <Button variant="outlined" color="error">
+                            <DeleteForeverIcon />
+                          </Button>
                         </TableCell>
                       </TableRow>
                     ))}
