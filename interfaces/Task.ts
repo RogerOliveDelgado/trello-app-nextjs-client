@@ -1,20 +1,21 @@
 import User from "./User";
 
-export default interface Task {
-  data: [
-    {
-      _id: string;
-      title: string;
-      description: string;
-      employees: User[];
-      initDate: string;
-      endDate: string;
-      board: string;
-      state: TaskState;
-      tags?: Tag[];
-    }
-  ];
+export default interface Response {
+  data: Task[];
 }
+
+export type Task = {
+  _id: string;
+  title: string;
+  description: string;
+  employees: User[];
+  initDate: string;
+  endDate: string;
+  board: string;
+  state: TaskState;
+  tags?: Tag[];
+};
+
 export type Tag = {
   title: string;
   color: Color;

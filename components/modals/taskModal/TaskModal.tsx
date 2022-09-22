@@ -5,26 +5,19 @@ import {
   Dialog,
   DialogActions,
   DialogContent,
-  DialogContentText,
   DialogTitle,
   FormControl,
   MenuItem,
-  Select,
   TextField,
-  Typography,
 } from "@mui/material";
-import getTasks from "../../../services/getTasks";
 import { createTaskReq } from "../../../services/createTask";
-import { useAppDispatch } from "../../../redux/hooks";
 import { useDispatch } from "react-redux";
 import { tasksActions } from "../../../redux/slices/tasksSlice";
 import getBoards from "../../../services/getBoards";
 import { Boards } from "../../../interfaces/Board";
 import { useAppSelector } from "../../../redux/hooks";
 
-import styles from "../../../styles/Dashboard.module.css";
 
-//TODO: fetch boards and add to select option in modal
 
 type Props = {
   openModal: boolean;

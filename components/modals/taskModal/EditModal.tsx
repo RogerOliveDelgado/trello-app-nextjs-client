@@ -1,36 +1,27 @@
-import React, { SetStateAction, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Button,
   Box,
   Dialog,
   DialogActions,
   DialogContent,
-  DialogContentText,
   DialogTitle,
   FormControl,
   MenuItem,
-  Select,
   TextField,
-  Typography,
 } from "@mui/material";
-import getTasks from "../../../services/getTasks";
-import { createTaskReq } from "../../../services/createTask";
-import { useAppDispatch } from "../../../redux/hooks";
 import { useDispatch } from "react-redux";
 import { tasksActions } from "../../../redux/slices/tasksSlice";
 import getBoards from "../../../services/getBoards";
 import { Boards } from "../../../interfaces/Board";
 import { useAppSelector } from "../../../redux/hooks";
-import Task from "../../../interfaces/Task";
 import { editTaskReq } from "../../../services/editTask";
-import styles from "../../../styles/Dashboard.module.css";
-
-//TODO: fetch boards and add to select option in modal
+import { Task } from "../../../interfaces/Task";
 
 type Props = {
   openModal: boolean;
   handleClose: () => void;
-  task: any;
+  task: Task;
   taskId: string;
 };
 
@@ -52,11 +43,9 @@ export const EditModal = ({ openModal, handleClose, task, taskId }: Props) => {
   const [title, setTitle] = useState(String);
   const [description, setDescription] = useState(String);
   const [board, setBoard] = useState(String);
-  const [initDate, setInitDate] = useState(
-    new Date().toISOString().slice(0, 10)
-  );
-  const [endDate, setEndDate] = useState(new Date().toISOString().slice(0, 10));
-  const [state, setState] = useState("Todo");
+  const [initDate, setInitDate] = useState(task.initDate.split("T")[0]);
+  const [endDate, setEndDate] = useState(task.endDate.slice(0, 10));
+  const [state, setState] = useState(String);
 
   const initMonth = initDate.split("-")[1];
   const initDay = initDate.split("-")[2];
@@ -67,6 +56,8 @@ export const EditModal = ({ openModal, handleClose, task, taskId }: Props) => {
   const endDay = endDate.split("-")[2];
   const endYear = endDate.split("-")[0];
   const endDateFormated = `${endMonth}-${endDay}-${endYear}`;
+
+  console.log(initDate);
 
   useEffect(() => {
     getBoards(setBoards);

@@ -17,20 +17,11 @@ import SidebarComponent from "../sidebar/SidebarComponent";
 import TasksLayout from "../card/task/TasksLayout";
 import BoardsLayout from "../card/board/BoardsLayout";
 import styles from "../../styles/Dashboard.module.css";
-import Task from "../../interfaces/Task";
 
-// type Props = {
-//   tasks: {
-//     data: {
-//       data: Task[];
-//     };
-//   };
-// };
 
-//TODO - remove type any when merge with board functionality
-type Props = any;
 
-const DashboardContent = (props: Props) => {
+
+const DashboardContent = () => {
   const [open, setOpen] = React.useState(true);
   const toggleDrawer = () => {
     setOpen(!open);
