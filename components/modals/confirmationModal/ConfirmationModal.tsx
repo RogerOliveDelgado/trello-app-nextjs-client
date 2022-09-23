@@ -38,7 +38,6 @@ const ConfirmationModal = ({ open, handleClose }: Props) => {
   };
 
   const onChange = (event: any) => {
-    console.log(event.target.value);
     setUser({
       ...user,
       [event.target.name]: event.target.value,

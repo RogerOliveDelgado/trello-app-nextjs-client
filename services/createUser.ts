@@ -13,7 +13,5 @@ export const createUser = async (requestOptions: Options) => {
   );
   const res = await req.json();
 
-  console.log(res);
-
   return res;
 };

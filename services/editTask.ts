@@ -1,7 +1,7 @@
 type Options = {
   method: string;
   headers: {
-    "Content-Type": string;
+    'Content-Type': string;
   };
   body: string;
 };
@@ -12,6 +12,6 @@ export const editTaskReq = async (requestOptions: Options, id: string) => {
     requestOptions
   );
   const res = await req.json();
-  console.log(res);
+
   return res;
 };
