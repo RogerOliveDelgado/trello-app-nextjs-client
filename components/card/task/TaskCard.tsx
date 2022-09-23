@@ -29,7 +29,7 @@ const reqOptions = {
 export default function TaskCard({ task }: Props) {
   const [openModal, setOpenModal] = React.useState(false);
 
-  const handleClickOpen = () => {
+  const handleClickOpen = (task: any) => {
     setOpenModal(true);
   };
 
@@ -87,7 +87,7 @@ export default function TaskCard({ task }: Props) {
                 bgcolor: "blueviolet",
               }}
             >
-              J
+              {task.title[0]}
             </Avatar>
           }
         />
@@ -111,7 +111,10 @@ export default function TaskCard({ task }: Props) {
           textAlign: "end",
         }}
       >
-        <IconButton aria-label="edit task" onClick={handleClickOpen}>
+        <IconButton
+          aria-label="edit task"
+          onClick={() => handleClickOpen(task)}
+        >
           <EditIcon />
         </IconButton>
         <IconButton aria-label="delete task" onClick={deleteTask}>

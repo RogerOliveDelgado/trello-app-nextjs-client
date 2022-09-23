@@ -12,7 +12,7 @@ export type Task = {
   initDate: string;
   endDate: string;
   board: string;
-  state: TaskState;
+  state: string;
   tags?: Tag[];
 };
 
