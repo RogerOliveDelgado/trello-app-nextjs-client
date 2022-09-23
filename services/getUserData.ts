@@ -1,4 +1,4 @@
-import User from '../interfaces/User';
+import User from "../interfaces/User";
 
 interface UserDataResponse {
   ok: boolean;
@@ -11,7 +11,7 @@ export const getUserData = async (
 ): Promise<UserDataResponse | undefined> => {
   try {
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_BACKEND_URL}/user/${userId}`,
+      `https://trello-app-express-server.vercel.app/user/${userId}`,
       {
         headers: {
           Authorization: `Bearer ${token}`,

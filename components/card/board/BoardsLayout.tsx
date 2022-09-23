@@ -27,7 +27,8 @@ const TasksLayout = () => {
   }, [boardList]);
 
   const { data } = boards;
-
+  console.log(data)
+  console.log("boards:", boards)
   return (
     <main className={styles.main}>
       <section className={styles.section}>

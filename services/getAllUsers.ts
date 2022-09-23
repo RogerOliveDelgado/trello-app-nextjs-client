@@ -10,7 +10,7 @@ export const getUsersList = async (
 ): Promise<UsersDataResponse | undefined> => {
   try {
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_BACKEND_URL}/user`,
+      `https://trello-app-express-server.vercel.app/user`,
       {
         headers: {
           Authorization: `Bearer ${token}`,
