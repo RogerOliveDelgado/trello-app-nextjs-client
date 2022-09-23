@@ -1,23 +1,23 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
 
-import styles from "../../../styles/Dashboard.module.css";
-import BoardCard from "./CardBoardComponent";
+import styles from '../../../styles/Dashboard.module.css';
+import BoardCard from './CardBoardComponent';
 
-import getBoards from "../../../services/getBoards";
+import getBoards from '../../../services/getBoards';
 
 //Add type Props when Backend is ready
-import { Boards } from "../../../interfaces/Board";
-import { useAppSelector } from "../../../redux/hooks";
+import { Boards } from '../../../interfaces/Board';
+import { useAppSelector } from '../../../redux/hooks';
 
 const TasksLayout = () => {
   const boardList = useAppSelector((state) => state.boardList);
   const [boards, setBoards] = useState<Boards>({
     data: [
       {
-        _id: "",
-        name: "",
+        _id: '',
+        name: '',
         tasks: [],
-        initDate: "",
+        initDate: '',
       },
     ],
   });
@@ -27,8 +27,7 @@ const TasksLayout = () => {
   }, [boardList]);
 
   const { data } = boards;
-  console.log(data)
-  console.log("boards:", boards)
+
   return (
     <main className={styles.main}>
       <section className={styles.section}>

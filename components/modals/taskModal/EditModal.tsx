@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
 import {
   Button,
   Box,
@@ -9,14 +9,14 @@ import {
   FormControl,
   MenuItem,
   TextField,
-} from "@mui/material";
-import { useDispatch } from "react-redux";
-import { tasksActions } from "../../../redux/slices/tasksSlice";
-import getBoards from "../../../services/getBoards";
-import { Boards } from "../../../interfaces/Board";
-import { useAppSelector } from "../../../redux/hooks";
-import { editTaskReq } from "../../../services/editTask";
-import { Task } from "../../../interfaces/Task";
+} from '@mui/material';
+import { useDispatch } from 'react-redux';
+import { tasksActions } from '../../../redux/slices/tasksSlice';
+import getBoards from '../../../services/getBoards';
+import { Boards } from '../../../interfaces/Board';
+import { useAppSelector } from '../../../redux/hooks';
+import { editTaskReq } from '../../../services/editTask';
+import { Task } from '../../../interfaces/Task';
 
 type Props = {
   openModal: boolean;
@@ -30,10 +30,10 @@ export const EditModal = ({ openModal, handleClose, task, taskId }: Props) => {
   const [boards, setBoards] = useState<Boards>({
     data: [
       {
-        _id: "",
-        name: "",
+        _id: '',
+        name: '',
         tasks: [],
-        initDate: "",
+        initDate: '',
       },
     ],
   });
@@ -47,18 +47,18 @@ export const EditModal = ({ openModal, handleClose, task, taskId }: Props) => {
   const [endDate, setEndDate] = useState(formatDate(task.endDate));
   const [state, setState] = useState(task.state);
 
-  const initMonth = initDate.split("-")[1];
-  const initDay = initDate.split("-")[2];
-  const initYear = initDate.split("-")[0];
+  const initMonth = initDate.split('-')[1];
+  const initDay = initDate.split('-')[2];
+  const initYear = initDate.split('-')[0];
   const initDateFormated = `${initMonth}-${initDay}-${initYear}`;
 
-  const endMonth = endDate.split("-")[1];
-  const endDay = endDate.split("-")[2];
-  const endYear = endDate.split("-")[0];
+  const endMonth = endDate.split('-')[1];
+  const endDay = endDate.split('-')[2];
+  const endYear = endDate.split('-')[0];
   const endDateFormated = `${endMonth}-${endDay}-${endYear}`;
 
   function formatDate(date: string) {
-    const [year, month, day] = date.split("T")[0].split("-");
+    const [year, month, day] = date.split('T')[0].split('-');
     const dateFormated = `${year}-${month}-${day}`;
     return dateFormated;
   }
@@ -70,9 +70,9 @@ export const EditModal = ({ openModal, handleClose, task, taskId }: Props) => {
   const dispatch = useDispatch();
 
   const requestOptions = {
-    mode: "cors",
-    method: "PATCH",
-    headers: { "Content-Type": "application/json" },
+    mode: 'cors',
+    method: 'PATCH',
+    headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
       title: title,
       description: description,
@@ -86,7 +86,6 @@ export const EditModal = ({ openModal, handleClose, task, taskId }: Props) => {
   const editTask = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const { data: tasks } = await editTaskReq(requestOptions, taskId);
-    console.log(tasks);
     dispatch(tasksActions.editTask(tasks));
     handleClose();
   };
@@ -96,9 +95,9 @@ export const EditModal = ({ openModal, handleClose, task, taskId }: Props) => {
       open={openModal}
       onClose={handleClose}
       sx={{
-        "& .MuiDialog-paper": {
-          width: "50rem",
-          maxWidth: "80rem",
+        '& .MuiDialog-paper': {
+          width: '50rem',
+          maxWidth: '80rem',
         },
       }}
     >
@@ -106,9 +105,9 @@ export const EditModal = ({ openModal, handleClose, task, taskId }: Props) => {
       <FormControl component="form" onSubmit={editTask}>
         <DialogContent
           sx={{
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "space-between",
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'space-between',
           }}
         >
           <TextField
@@ -127,8 +126,8 @@ export const EditModal = ({ openModal, handleClose, task, taskId }: Props) => {
           />
           <Box
             sx={{
-              display: "flex",
-              flexDirection: "row",
+              display: 'flex',
+              flexDirection: 'row',
             }}
           >
             <TextField
@@ -165,7 +164,7 @@ export const EditModal = ({ openModal, handleClose, task, taskId }: Props) => {
             select
             required
             label="State"
-            sx={{ width: "10rem", marginTop: 2 }}
+            sx={{ width: '10rem', marginTop: 2 }}
             onChange={(e) => setState(e.target.value)}
           >
             <MenuItem value="Todo">To do</MenuItem>
@@ -179,7 +178,7 @@ export const EditModal = ({ openModal, handleClose, task, taskId }: Props) => {
             select
             required
             label="Board"
-            sx={{ width: "10rem", marginTop: 2 }}
+            sx={{ width: '10rem', marginTop: 2 }}
             onClick={() => getBoards(setBoards)}
           >
             {data.map((board) => (

@@ -6,9 +6,9 @@ type Options = {
   body: string;
 };
 
-export const editTaskReq = async (requestOptions: Options, id: string) => {
+export const createUser = async (requestOptions: Options) => {
   const req = await fetch(
-    `https://trello-app-express-server.vercel.app/task/${id}`,
+    'https://trello-app-express-server.vercel.app/auth/SignUp',
     requestOptions
   );
   const res = await req.json();

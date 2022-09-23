@@ -5,6 +5,7 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Button from '@mui/material/Button';
+import { createUser } from '../../../services/createUser';
 import {
   Grid,
   TextField,
@@ -12,6 +13,7 @@ import {
   MenuItem,
   SelectChangeEvent,
   InputLabel,
+  SelectProps,
 } from '@mui/material';
 
 type Props = {
@@ -21,10 +23,28 @@ type Props = {
 
 const ConfirmationModal = ({ open, handleClose }: Props) => {
   const [role, setRole] = useState('Admin');
+  const [user, setUser] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    address: '',
+    password: '',
+    birthday: '',
+    role: 'User',
+  });
 
   const handleChange = (event: SelectChangeEvent) => {
     setRole(event.target.value as string);
   };
+
+  const onChange = (event: any) => {
+    setUser({
+      ...user,
+      [event.target.name]: event.target.value,
+    });
+  };
+
+  const createUser = async (event: any) => {};
 
   return (
     <Dialog
@@ -32,9 +52,9 @@ const ConfirmationModal = ({ open, handleClose }: Props) => {
       aria-labelledby="alert-dialog-title"
       aria-describedby="alert-dialog-description"
     >
-      <DialogTitle id="alert-dialog-title">{'Add new User'}</DialogTitle>
+      <DialogTitle>{'Add new User'}</DialogTitle>
       <DialogContent>
-        <DialogContentText id="alert-dialog-description">
+        <DialogContentText>
           <Grid container spacing={1}>
             <Grid item md={6} xs={12}>
               <TextField
@@ -42,6 +62,8 @@ const ConfirmationModal = ({ open, handleClose }: Props) => {
                 helperText="Please specify the first name"
                 label="First name"
                 name="firstName"
+                onChange={onChange}
+                value={user.firstName}
                 required
                 variant="outlined"
               />
@@ -51,6 +73,8 @@ const ConfirmationModal = ({ open, handleClose }: Props) => {
                 fullWidth
                 label="Last name"
                 name="lastName"
+                onChange={onChange}
+                value={user.lastName}
                 required
                 variant="outlined"
               />
@@ -60,6 +84,8 @@ const ConfirmationModal = ({ open, handleClose }: Props) => {
                 fullWidth
                 label="Address"
                 name="address"
+                onChange={onChange}
+                value={user.address}
                 required
                 variant="outlined"
               />
@@ -70,6 +96,8 @@ const ConfirmationModal = ({ open, handleClose }: Props) => {
                 label="Email"
                 name="email"
                 required
+                onChange={onChange}
+                value={user.email}
                 variant="outlined"
               />
             </Grid>
@@ -79,6 +107,8 @@ const ConfirmationModal = ({ open, handleClose }: Props) => {
                 label="Password"
                 name="password"
                 type="password"
+                onChange={onChange}
+                value={user.password}
                 required
                 variant="outlined"
               />
@@ -89,6 +119,8 @@ const ConfirmationModal = ({ open, handleClose }: Props) => {
                 label="Birthday"
                 name="birthday"
                 type="date"
+                onChange={onChange}
+                value={user.birthday}
                 required
                 variant="outlined"
               />
@@ -99,10 +131,11 @@ const ConfirmationModal = ({ open, handleClose }: Props) => {
                 labelId="select-role"
                 id="select-role"
                 label="Role"
-                value={role}
+                onChange={onChange}
+                value={user.role}
               >
-                <MenuItem value={'admin'}>Admin</MenuItem>
-                <MenuItem value={'user'}>User</MenuItem>
+                <MenuItem value={'Admin'}>Admin</MenuItem>
+                <MenuItem value={'User'}>User</MenuItem>
               </Select>
             </Grid>
           </Grid>
@@ -110,7 +143,7 @@ const ConfirmationModal = ({ open, handleClose }: Props) => {
       </DialogContent>
       <DialogActions>
         <Button onClick={handleClose}>Cancel</Button>
-        <Button onClick={handleClose} autoFocus>
+        <Button onClick={createUser} autoFocus>
           Add
         </Button>
       </DialogActions>

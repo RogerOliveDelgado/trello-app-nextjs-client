@@ -5,6 +5,7 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import { UserContext } from '../../contexts/UserContext';
 import { useRouter } from 'next/router';
+import { Divider, MenuList } from '@mui/material';
 
 const UserAvatar = () => {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -35,7 +36,7 @@ const UserAvatar = () => {
         onClick={handleMenu}
         color="inherit"
       >
-        {/* <Avatar alt={userData.firstName} src="" /> */}
+        <Avatar alt={userData.firstName} src="" />
       </IconButton>
       <Menu
         id="menu-appbar"
@@ -52,7 +53,14 @@ const UserAvatar = () => {
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        <MenuItem onClick={handleLogout}>Logout</MenuItem>
+        <MenuList>
+          <MenuItem
+            disabled
+          >{`${userData.firstName} ${userData.lastName}`}</MenuItem>
+          <MenuItem disabled>{userData.email}</MenuItem>
+          <Divider />
+          <MenuItem onClick={handleLogout}>Logout</MenuItem>
+        </MenuList>
       </Menu>
     </div>
   );

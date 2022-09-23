@@ -15,7 +15,7 @@ type Props = {};
 
 const Account = (props: Props) => {
   const { userData, setUserData } = useContext(UserContext);
-  console.log(userData);
+
   return (
     <div>
       <Card {...props}>
