@@ -20,7 +20,7 @@ import Head from 'next/head';
 import UsersToolbar from '../components/usersToolbar/UsersToolbar';
 import UsersTable from '../components/usersTable/UsersTable';
 import UserAvatar from '../components/avatar/UserAvatar';
-import { UserContext } from '../contexts/UserContext';
+
 import { useRouter } from 'next/router';
 const drawerWidth: number = 240;
 
@@ -163,11 +163,11 @@ function DashboardContent() {
 }
 
 export default function AdminDashboard() {
-  const { userData } = useContext(UserContext);
   const router = useRouter();
 
   useEffect(() => {
-    if (userData.role === 'user') {
+    const user = JSON.parse(localStorage.getItem('userData')!);
+    if (user.role === 'user') {
       router.push('/userDashbaord');
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
