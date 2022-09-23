@@ -104,10 +104,10 @@ export default function BoardCard({ board }: Board) {
         }
       />
       <CardContent>
+        <p>Tasks:</p>
         {board.tasks.map((task: Task) => {
           return (
             <div key={task._id}>
-              <p>Tasks</p>
               <ul>
                 <li>{task.title}</li>
               </ul>

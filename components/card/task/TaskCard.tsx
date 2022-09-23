@@ -30,7 +30,6 @@ export default function TaskCard({ task }: Props) {
   const [openModal, setOpenModal] = React.useState(false);
 
   const handleClickOpen = (task: any) => {
-    console.log(task)
     setOpenModal(true);
   };
 
@@ -88,7 +87,7 @@ export default function TaskCard({ task }: Props) {
                 bgcolor: "blueviolet",
               }}
             >
-              J
+              {task.title[0]}
             </Avatar>
           }
         />
@@ -112,14 +111,17 @@ export default function TaskCard({ task }: Props) {
           textAlign: "end",
         }}
       >
-        <IconButton aria-label="edit task" onClick={() => handleClickOpen(task)}>
+        <IconButton
+          aria-label="edit task"
+          onClick={() => handleClickOpen(task)}
+        >
           <EditIcon />
         </IconButton>
         <IconButton aria-label="delete task" onClick={deleteTask}>
           <DeleteForeverIcon />
         </IconButton>
       </CardActions>
-        
+
       {openModal && (
         <EditModal
           openModal={openModal}
