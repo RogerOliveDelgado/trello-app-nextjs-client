@@ -164,20 +164,30 @@ function DashboardContent() {
 
 export default function AdminDashboard() {
   const router = useRouter();
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const user = JSON.parse(localStorage.getItem('userData')!);
-    if (user.role === 'user') {
-      router.push('/userDashbaord');
+    const user = JSON.parse(localStorage.getItem('userData')!) || null;
+
+    if (user === null) {
+      router.push('/');
+    } else if (user.role === 'user') {
+      router.push('/userDashbaord', undefined, { shallow: true });
+    } else {
+      setLoading(false);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
     <>
-      <Head>
-        <title>Dashboard</title>
-      </Head>
-      <DashboardContent />;
+      {!loading && (
+        <>
+          <Head>
+            <title>Dashboard</title>
+          </Head>
+          <DashboardContent />;
+        </>
+      )}
     </>
   );
 }
